@@ -31,3 +31,19 @@ int _puts(char *buff)
 		return (-1);
 	return (1);
 }
+
+/**
+ * _strcmp - function compares between two strings
+ * @str1: first string
+ * @str2: second string
+ *
+ * Return: 1 if equal, 0 otherwise
+ */
+int _strcmp(char *str1, char *str2)
+{
+	if (!*str1 && !*str2)
+		return (1);
+	if (*str1 != *str2)
+		return (0);
+	return (_strcmp(str1 + 1, str2 + 1));
+}
