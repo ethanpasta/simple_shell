@@ -18,12 +18,16 @@ int main(int __attribute__((unused)) ac, char **av)
 	signal(SIGINT, SIG_IGN);
 	buffer_size = 32;
 	buffer = malloc(sizeof(char) * buffer_size);
-	_puts("$shellfish$ ");
-	check = getline(&buffer, &buffer_size, stdin);
-	while (_strcmp(buffer, "exit\n") == 0)
+	while (1)
 	{
-		if (check == -1)
-			_puts("\n");
+		_puts("$shellfish$ ");
+		if (getline(&buffer, &buffer_size, stdin) == -1)
+		{
+			_puts("\n");
+			break;
+		}
+		if (_strcmp(buffer, "exit\n") == 1)
+			break;
 		real_size = _strlen(buffer);
 		buffer[real_size - 1] = '\0';
 		child_p = fork();
@@ -38,8 +42,6 @@ int main(int __attribute__((unused)) ac, char **av)
 		}
 		else
 			wait(NULL);
-		_puts("$shellfish$ ");
-                check = getline(&buffer, &buffer_size, stdin);
 	}
 	free(buffer);
 	return 0;
