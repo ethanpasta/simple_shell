@@ -1,11 +1,13 @@
 #include "shell_head.h"
 
 /**
+ * print_env - function prints all environment variables and their values
+ * @env: environment array containing all environment variables
  *
- *
+ * Return: none
  */
 
-void print_env(__attribute__((unused))char** env)
+void print_env(__attribute__((unused))char **env)
 {
 	int i;
 
@@ -17,8 +19,8 @@ void print_env(__attribute__((unused))char** env)
 }
 
 /**
- *
- *
+ * set_env - initializes an environment variable, or modifies an existing one
+ * @env: environment variable
  *
  */
 
