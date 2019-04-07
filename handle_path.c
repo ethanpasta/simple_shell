@@ -27,13 +27,15 @@ char *check_file_withP(char **env, char *command)
 	int i;
 
 	str = find_path(env);
+	if (!str)
+		return (NULL);
 	pa = strtow(str, ':');
 	for (i = 0; pa[i]; i++)
 	{
 		tmp = str_concat(pa[i], "//");
 		build_path = str_concat(tmp, command);
-		if (stat(build_path, &st) == 0)
+		if (stat(build_path, &st) == 0 && access(build_path, X_OK) == 0)
 			return (build_path);
 	}
-	return ("none");
+	return (NULL);
 }
