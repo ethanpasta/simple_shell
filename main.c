@@ -9,11 +9,10 @@
 
 int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char **env)
 {
+	int i;
 	char *buffer;
 	char **args;
-	char *command;
 	size_t buffer_size;
-	size_t real_size;
 	pid_t child_p;
 	built_t built_ins[] = {
 		{"env", print_env},
@@ -30,46 +29,20 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 	{
 		if (isatty(0))
 			_puts(" ($) ");
-		if (getline(&buffer, &buffer_size, stdin) == -1)
-		{
-			_puts("\n");
-			exit(98);
-		}
-		if (_strcmp(buffer, "exit\n"))
-			exit(99);
-		real_size = _strlen(buffer);
-		buffer[real_size - 1] = '\0';
-		args = strtow(buffer, ' ');
+		args = check_create_args(&buffer, &buffer_size);
 		if (args)
 		{
 			child_p = fork();
 			if (child_p == 0)
-			{
-				if (do_built_in(args[0], env, built_ins) == 1)
-				{
-					free(buffer);
-					exit(102);
-				}
-				command = check_file_withP(env, args[0]);
-				if (command && execve(command, args, NULL) == -1)
-				{
-					perror(args[0]);
-					free(buffer);
-					exit(100);
-				}
-				if (execve(args[0], args, NULL) == -1)
-				{
-					perror(args[0]);
-					free(buffer);
-					exit(101);
-				}
-			}
+				child_proc(args, built_ins, env, &buffer);
 			else
 			{
+				for (i = 0; args[i]; i++)
+					free(args[i]);
+				free(args);
 				wait(NULL);
 			}
 		}
 	}
-	free(buffer);
 	return 0;
 }
