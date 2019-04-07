@@ -1,8 +1,6 @@
 #include "shell_head.h"
-#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
 
 char *find_path(char **env)
 {
@@ -29,10 +27,15 @@ char *check_file_withP(char **env, char *command)
 	str = find_path(env);
 	if (!str)
 		return (NULL);
+	/* if PATH contains ':' in the beginning */
+	if (str[0] == ':' && !stat(command, &st) && !access(command, X_OK))
+		return str_concat(".//", command);
+	/* seperate path directories */
 	pa = strtow(str, ':');
 	for (i = 0; pa[i]; i++)
 	{
 		tmp = str_concat(pa[i], "//");
+		/* create path to command */
 		build_path = str_concat(tmp, command);
 		if (stat(build_path, &st) == 0 && access(build_path, X_OK) == 0)
 			return (build_path);
