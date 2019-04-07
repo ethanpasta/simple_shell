@@ -1,5 +1,8 @@
 #ifndef SHELL_HEAD
 #define SHELL_HEAD
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 typedef struct built
 {
@@ -15,10 +18,13 @@ int word_count(char *, char);
 char *find_path(char **);
 char *check_file_withP(char **, char *);
 char *str_concat(char *, char *);
-int do_built_in(char *arg, char** env, built_t a[]);
-void print_env(char** env);
-void set_env(char** env);
-void unset_env(char** env);
-void change_dir(char** env);
+int do_built_in(char *, char **, built_t *);
+void print_env(char **);
+void set_env(char **);
+void unset_env(char **);
+void change_dir(char **);
+char **check_create_args(char **, size_t *);
+void child_proc(char **, built_t *, char **, char **);
+int _atoi(char *);
 
 #endif
