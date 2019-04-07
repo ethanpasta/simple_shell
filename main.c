@@ -7,6 +7,14 @@
 #include <stdlib.h>
 #include "shell_head.h"
 
+/**
+ * main - entry point
+ * @ac: number of arguments
+ * @av: array of arguments
+ * @env: environment variable
+ *
+ * Return: exit status
+ */
 int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char **env)
 {
 	int i;
@@ -16,9 +24,9 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 	pid_t child_p;
 	built_t built_ins[] = {
 		{"env", print_env},
-		{"setenv", set_env},
-		{"unsetenv", unset_env},
-		{"cd", change_dir},
+		{"setenv", NULL},
+		{"unsetenv", NULL},
+		{"cd", NULL},
 		{NULL, NULL}
 	};
 
@@ -34,7 +42,7 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 		{
 			child_p = fork();
 			if (child_p == 0)
-				child_proc(args, built_ins, env, &buffer);
+				child_proc(args, built_ins, env);
 			else
 			{
 				for (i = 0; args[i]; i++)
@@ -44,5 +52,5 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 			}
 		}
 	}
-	return 0;
+	return (0);
 }

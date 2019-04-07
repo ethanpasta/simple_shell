@@ -6,6 +6,7 @@
  * word_count - function counts amount of words
  * seperated by space
  * @s: string to check
+ * @del: delimiter to count words with
  *
  * Return: number of words
  */
@@ -30,6 +31,7 @@ int word_count(char *s, char del)
 /**
  * strtow - function splits a string into words by delimeter
  * @str: string to split up
+ * @del: delimiter to split string with
  *
  * Return: a pointer to an array of strings
  */

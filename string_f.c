@@ -20,7 +20,7 @@ int _strlen(char *str)
 
 /**
  * _puts - function prints buffer to standard output
- * @str: string to print
+ * @buff: string to print
  *
  * Return: 1 on success, -1 on failure
  */

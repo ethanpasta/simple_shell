@@ -19,45 +19,14 @@ void print_env(__attribute__((unused))char **env)
 }
 
 /**
- * set_env - initializes an environment variable, or modifies an existing one
+ * do_built_in - function executes built in commands
+ * @arg: array of arguments
  * @env: environment variable
+ * @a: array of built-in structures
  *
+ * Return: 1 on success, 0 otherwise
  */
-
-void set_env(__attribute__((unused))char** env)
-{
-
-}
-
-
-/**
- *
- *
- *
- */
-
-void unset_env(__attribute__((unused))char** env)
-{
-
-}
-
-/**
- *
- *
- */
-
-void change_dir(__attribute__((unused))char** env)
-{
-
-}
-
-/**
- *
- *
- *
- */
-
-int do_built_in(char *arg, char** env, built_t a[])
+int do_built_in(char *arg, char **env, built_t a[])
 {
 	int i;
 
@@ -66,7 +35,7 @@ int do_built_in(char *arg, char** env, built_t a[])
 		if (_strcmp(a[i].built_in, arg))
 		{
 			a[i].f(env);
-			return(1);
+			return (1);
 		}
 	}
 	return (0);

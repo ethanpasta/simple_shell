@@ -24,7 +24,7 @@ void set_env(char **);
 void unset_env(char **);
 void change_dir(char **);
 char **check_create_args(char **, size_t *);
-void child_proc(char **, built_t *, char **, char **);
+void child_proc(char **, built_t *, char **);
 int _atoi(char *);
 
 #endif

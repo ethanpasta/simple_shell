@@ -2,6 +2,12 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+/**
+ * find_path - function returns the value of the PATH variable
+ * @env: environment variable
+ *
+ * Return: PATH value, or NULL if it could not be found
+ */
 char *find_path(char **env)
 {
 	char **var_val, *var, *val;
@@ -18,6 +24,15 @@ char *find_path(char **env)
 	return (NULL);
 }
 
+/**
+ * check_file_withP - function checks if command is in one of the
+ * PATH directories
+ * @env: environment variable
+ * @command: the command
+ *
+ * Return: full path to command (with PATH directory), or NULL if command does
+ * not exist in PATH
+ */
 char *check_file_withP(char **env, char *command)
 {
 	struct stat st;
@@ -29,7 +44,7 @@ char *check_file_withP(char **env, char *command)
 		return (NULL);
 	/* if PATH contains ':' in the beginning */
 	if (str[0] == ':' && !stat(command, &st) && !access(command, X_OK))
-		return str_concat(".//", command);
+		return (str_concat(".//", command));
 	/* seperate path directories */
 	pa = strtow(str, ':');
 	for (i = 0; pa[i]; i++)
