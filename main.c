@@ -15,7 +15,13 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 	size_t buffer_size;
 	size_t real_size;
 	pid_t child_p;
-	int i = 0;
+	built_t built_ins[] = {
+		{"env", print_env},
+		{"setenv", set_env},
+		{"unsetenv", unset_env},
+		{"cd", change_dir},
+		{NULL, NULL}
+	};
 
 	signal(SIGINT, SIG_IGN);
 	buffer_size = 32;
@@ -39,6 +45,11 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 			child_p = fork();
 			if (child_p == 0)
 			{
+				if (do_built_in(args[0], env, built_ins) == 1)
+				{
+					free(buffer);
+					exit(102);
+				}
 				command = check_file_withP(env, args[0]);
 				if (command && execve(command, args, NULL) == -1)
 				{
@@ -58,7 +69,6 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 				wait(NULL);
 			}
 		}
-		i++;
 	}
 	free(buffer);
 	return 0;
