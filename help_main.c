@@ -2,6 +2,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "shell_head.h"
+#include <errno.h>
+
+/**
+ * error_msg - function writes message to standard error
+ * @line_num: number of line on exit
+ * @args: array of arguments
+ * @av: array of arguments passed to file
+ *
+ * Return: none
+ */
+void error_msg(size_t line_num, char **args, char **av)
+{
+	char *buff = "";
+
+	if (errno == ENOENT || errno == ENOTDIR)
+	{
+		buff = str_concat(buff, av[0]);
+		buff = str_concat(buff, ": ");
+		buff = str_concat(buff, _itoa(line_num));
+		buff = str_concat(buff, ": ");
+		buff = str_concat(buff, args[0]);
+		buff = str_concat(buff, ": ");
+		buff = str_concat(buff, "not found\n");
+		if (write(2, buff, _strlen(buff)) == -1)
+			return;
+	}
+	else
+		perror(args[0]);
+
+}
 
 /**
  * check_create_args - function gets input from user, and checks if argument
@@ -45,7 +75,7 @@ char **check_create_args(char **buffer, size_t *buffer_size)
  *
  * Return: none
  */
-void child_proc(char **args, built_t built_ins[], char **env)
+void child_proc(char **args, built_t built_ins[], char **env, char **av, size_t line_num)
 {
 	char *command;
 
@@ -56,13 +86,13 @@ void child_proc(char **args, built_t built_ins[], char **env)
 	command = check_file_withP(env, args[0]);
 	if (command && execve(command, args, NULL) == -1)
 	{
-		perror(args[0]);
+		error_msg(line_num, args, av);
 		exit(100);
 	}
 	/* check (and execute) if command on its own is a full command path */
 	if (execve(args[0], args, NULL) == -1)
 	{
-		perror(args[0]);
+		error_msg(line_num, args, av);
 		exit(101);
 	}
 }
