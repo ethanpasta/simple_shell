@@ -25,8 +25,7 @@ void error_msg(size_t line_num, char **args, char **av)
 		buff = str_concat(buff, args[0]);
 		buff = str_concat(buff, ": ");
 		buff = str_concat(buff, "not found");
-		if (isatty(0))
-			buff = str_concat(buff, "\n");
+		buff = str_concat(buff, "\n");
 		if (write(2, buff, _strlen(buff)) == -1)
 			return;
 	}
@@ -51,7 +50,8 @@ char **check_create_args(char **buffer, size_t *buffer_size)
 
 	if (getline(buffer, buffer_size, stdin) == -1)
 	{
-		_puts("\n");
+		if (isatty(0))
+			_puts("\n");
 		exit(98);
 	}
 	real_size = _strlen(*buffer);
