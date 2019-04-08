@@ -15,13 +15,13 @@
  *
  * Return: exit status
  */
-int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char **env)
+int main(int ac, char **av, char **env)
 {
-	size_t line;
+	(void)ac;
+	(void)av;
+	size_t line = 0, buffer_size = 32;
 	int i;
-	char *buffer;
-	char **args;
-	size_t buffer_size;
+	char *buffer, **args;
 	pid_t child_p;
 	built_t built_ins[] = {
 		{"env", print_env},
@@ -32,9 +32,7 @@ int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char 
 	};
 
 	signal(SIGINT, SIG_IGN);
-	buffer_size = 32;
 	buffer = malloc(sizeof(char) * buffer_size);
-	line = 0;
 	while (1)
 	{
 		line++;
