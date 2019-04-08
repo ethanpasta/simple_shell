@@ -24,7 +24,9 @@ void error_msg(size_t line_num, char **args, char **av)
 		buff = str_concat(buff, ": ");
 		buff = str_concat(buff, args[0]);
 		buff = str_concat(buff, ": ");
-		buff = str_concat(buff, "not found\n");
+		buff = str_concat(buff, "not found");
+		if (isatty(0))
+			buff = str_concat(buff, "\n");
 		if (write(2, buff, _strlen(buff)) == -1)
 			return;
 	}
