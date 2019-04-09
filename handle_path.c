@@ -1,6 +1,4 @@
 #include "shell_head.h"
-#include <sys/types.h>
-#include <sys/stat.h>
 
 /**
  * find_env_value - function returns the value of a var environment variable
