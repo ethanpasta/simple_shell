@@ -74,7 +74,7 @@ char **check_create_args(char **buffer, size_t *buffer_size)
 void child_proc(char **args, built_t built_ins[], char **av, size_t line_num, pid_t *child_p)
 {
 	char *command;
-	char **env = built_ins[0].info.env;
+	char **env = built_ins[0].info->env;
 
 	/* check if command is a built in, if it is, go back to main while loop */
 	if (do_built_in(args, env, built_ins) == 1)
