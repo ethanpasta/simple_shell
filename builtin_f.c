@@ -1,12 +1,28 @@
 #include "shell_head.h"
 
 /**
- * print_env - function prints all environment variables and their values
- * @env: environment array containing all environment variables
+ * set_env - function intitializes a new environment variable,
+ * or modifies an existing one
+ * @env: array containing all environment variables
+ * @var: new variable new, or existing one
+ * @val: new variable value
  *
  * Return: none
  */
+void set_env(char **env, char *var, char *val)
+{
+	(void)env;
+	(void)var;
+	(void)val;
 
+}
+
+/**
+ * print_env - function prints all environment variables and their values
+ * @env: array containing all environment variables
+ *
+ * Return: none
+ */
 void print_env(__attribute__((unused))char **env)
 {
 	int i;
