@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
 	int i;
 	char *prompt = " :) ";
 	char *buffer, **args;
-	pid_t child_p;
+	pid_t child_p = 1;
 	built_info_t in;
 	built_t built_ins[] = {
 		{"exit", in, exit_shell},
@@ -51,7 +51,6 @@ int main(int ac, char **av, char **env)
 			child_proc(args, built_ins, av, line, &child_p);
 			if (child_p != 0)
 			{
-				printf("do you go in here\n");
 				for (i = 0; args[i]; i++)
 					free(args[i]);
 				free(args);
