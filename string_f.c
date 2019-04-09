@@ -82,19 +82,3 @@ char *str_concat(char *s1, char *s2)
 	s[pos] = '\0';
 	return (s);
 }
-
-/**
- * _strcpy - copies string from src to dest WITHOUT null character
- * @src: string to copy
- * @dest: destination to copy to
- *
- * Return: the pointer to dest
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i;
-
-	for (i = 0; src[i]; i++)
-		dest[i] = src[i];
-	return (dest);
-}
