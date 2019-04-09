@@ -1,40 +1,69 @@
 #include "shell_head.h"
 
 /**
- * print_env - function prints all environment variables and their values
- * @env: environment array containing all environment variables
+ * exit_shell - function exits the shell with/without an exit value
+ * @status: status to exit with
  *
  * Return: none
  */
+void exit_shell(built_info_t build)
+{
+	int status = 1;
 
-void print_env(__attribute__((unused))char **env)
+	if (build.args[1])
+		status = _atoi(build.args[1]);
+	exit(status);
+}
+
+/**
+ * set_env - function intitializes a new environment variable,
+ * or modifies an existing one
+ * @env: array containing all environment variables
+ * @var: new variable new, or existing one
+ * @val: new variable value
+ *
+ * Return: none
+ */
+void set_env(built_info_t build)
+{
+	(void)build;
+}
+
+/**
+ * print_env - function prints all environment variables and their values
+ * @env: array containing all environment variables
+ *
+ * Return: none
+ */
+void print_env(built_info_t build)
 {
 	int i;
 
-	for (i = 0; env[i]; i++)
+	for (i = 0; build.env[i];i++)
 	{
-		_puts(env[i]);
-		_puts("\n");
+		_puts(build.env[i], 1);
+		_puts("\n", 1);
 	}
 }
 
 /**
  * do_built_in - function executes built in commands
- * @arg: array of arguments
+ * @args: array of arguments
  * @env: environment variable
  * @a: array of built-in structures
  *
  * Return: 1 on success, 0 otherwise
  */
-int do_built_in(char *arg, char **env, built_t a[])
+int do_built_in(char **args, char **env, built_t a[])
 {
+	(void)env;
 	int i;
 
-	for (i = 0; a[i].f; i++)
+	for (i = 0; a[i].built_in; i++)
 	{
-		if (_strcmp(a[i].built_in, arg))
+		if (_strcmp(a[i].built_in, args[0]))
 		{
-			a[i].f(env);
+			a[i].f(a[i].info);
 			return (1);
 		}
 	}

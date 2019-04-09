@@ -32,7 +32,11 @@ The hsh shell reads input in terms of lines from a file and breaks it up into wo
 .PP
 .SH EXAMPLE
 .IP
+<<<<<<< HEAD
 -----Non-Interactive Mode-----
+=======
+Non-Interactive Mode
+>>>>>>> master
 .IP
 $ echo "/bin/ls" | ./hsh
 .PP
@@ -61,7 +65,11 @@ hsh main.c shell.c test_ls_2
 $
 .PP
 .IP
+<<<<<<< HEAD
 -----Interatcive Mode-----
+=======
+Interatcive Mode
+>>>>>>> master
 .PP
 .IP
 $ ./hsh

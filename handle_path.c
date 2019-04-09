@@ -3,23 +3,24 @@
 #include <sys/stat.h>
 
 /**
- * find_path - function returns the value of the PATH variable
- * @env: environment variable
+ * find_env_value - function returns the value of a var environment variable
+ * @env: array containting all environment variables
+ * @var: variable name of environment variable (e.g PATH)
  *
  * Return: PATH value, or NULL if it could not be found
  */
-char *find_path(char **env)
+char *find_env_value(char **env, char *var)
 {
-	char **var_val, *var, *val;
+	char **var_val, *env_var, *value;
 	int i;
 
 	for (i = 0; env[i]; i++)
 	{
 		var_val = strtow(env[i], '=');
-		var = var_val[0];
-		val = var_val[1];
-		if (_strcmp(var, "PATH"))
-			return (val);
+		env_var = var_val[0];
+		value = var_val[1];
+		if (_strcmp(env_var, var))
+			return (value);
 	}
 	return (NULL);
 }
@@ -39,7 +40,7 @@ char *check_file_withP(char **env, char *command)
 	char *build_path, *tmp, *str, **pa;
 	int i;
 
-	str = find_path(env);
+	str = find_env_value(env, "PATH");
 	if (!str)
 		return (NULL);
 	/* if PATH contains ':' in the beginning */

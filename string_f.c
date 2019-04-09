@@ -21,17 +21,18 @@ int _strlen(char *str)
 /**
  * _puts - function prints buffer to standard output
  * @buff: string to print
+ * @stand: which standard to print to
  *
  * Return: 1 on success, -1 on failure
  */
-int _puts(char *buff)
+int _puts(char *buff, int stand)
 {
 	size_t len;
 
 	if (!buff)
 		return (-1);
 	len = _strlen(buff);
-	if (write(1, buff, len) == -1)
+	if (write(stand, buff, len) == -1)
 		return (-1);
 	return (1);
 }
@@ -69,7 +70,7 @@ char *str_concat(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	size1 =  _strlen(s1);
+	size1 = _strlen(s1);
 	size2 = _strlen(s2);
 	s = malloc(sizeof(char) * (size1 + size2 + 1));
 	if (!s)
