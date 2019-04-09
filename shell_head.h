@@ -16,7 +16,7 @@ typedef struct built
 {
 	char *built_in;
 	built_info_t *info;
-	void (*f)(built_info_t);
+	void (*f)(built_info_t *);
 } built_t;
 
 /* Functions in string_f.c */
