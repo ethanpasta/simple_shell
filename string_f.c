@@ -30,6 +30,7 @@ int _puts(char *buff, int stand)
 	if (!buff)
 		return (-1);
 	len = _strlen(buff);
+	/* writing [buff] to standard [stand] */
 	if (write(stand, buff, len) == -1)
 		return (-1);
 	return (1);
