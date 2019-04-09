@@ -47,7 +47,7 @@ void un_set_env(built_info_t build)
 			}
 		}
 	}
-	if (flag == 0)
+	if (flag == 0 && _strcmp(build.args[0], "unsetenv"))
 		_puts("Error: Environment variable not found\n", 2);
 }
 
