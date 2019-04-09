@@ -14,7 +14,7 @@ typedef struct built
 /* Functions in string_f.c */
 int _strlen(char *);
 int _strcmp(char *, char *);
-int _puts(char *);
+int _puts(char *, int);
 char **strtow(char *, char);
 
 /* Functions in string_split.c */
