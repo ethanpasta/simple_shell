@@ -1,0 +1,89 @@
+.TH hsh 3 "17 April 2019" "GNU" "hsh Man Page"
+.SH NAME
+.B hsh
+- A custom made bash command that replicates what the sh command in the bash does. It creates a command line interpreter that executes commands read from a terminal or a file.
+.SH SYNOPSIS
+#include "shell_head.h"
+.PP
+int main(int __attribute__((unused)) ac, char __attribute__((unused))**av, char **env)
+.PP
+.hsh
+.SH DESCRIPTION
+The hsh executable is the file that creates a standard command interpreter within the current shell. The current version of hsh is close to how the sh command in bash is configured. While it has many similarities and features closely related to the Korn Shell, it is by no means a exact clone of the the Korn Shell. Only features that take in simple commands like "ls" are incorated into the hsh shell. 
+.PP
+.SH OVERVIEW
+The hsh shell is a command that reads lines from either a file or the terminal, then interprets them, and generally executes commands if inputed by the user. It will create a sub-shell within the current shell program that is running when a user logs into their system. Like the Korn Shell, commands can be typed directly to the running hsh shell -interactive mode- or can be put into a file and the file can be executed outside of the shell with the | (pipeline) operator in non-interactive mode.
+.SH INVOCATION
+If the hsh shell has been executed beforehand with ./hsh and afterwards has only the prompt($) appearing with awaiting input for the command line to read, then the hsh shell is in  interactive mode. An interactive shell generally has a prompty($0 displayed before each command can be entered into stdin. 
+.PP
+If stdin is placed outide the shell with a | pipleline operator used to connect a command like -echo "/bin/ls" | ./hsh- then the shell will be considered in non-interactive mode.
+.PP
+The shell will always read commands from the standard input.
+.SH RETURN
+Upon successful return, the shell will always return a 0 for success. However, if the hsh shell fails when a command is not inputed correctly or does not exist within the $PATH, then our hsh shell will exit and display an error message corresponding to the error the user committed. 
+.SH LEXICAL STRUCTURE
+The hsh shell reads input in terms of lines from a file and breaks it up into words at whitespace (whether they be blanks or tabs).
+
+.PP
+
+.SH FORMAT
+
+.SH BUGS
+.PP
+.SH EXAMPLE
+.IP
+Non-Interactive Mode
+.IP
+$ echo "/bin/ls" | ./hsh
+.PP
+.IP
+hsh main.c shell.c test_ls_2
+.PP
+.IP
+$ cat test_ls_2
+.PP
+.IP
+/bin/ls
+.PP
+.IP
+/bin/ls
+.PP
+.IP
+$ cat test_ls_2 | ./hsh
+.PP
+.IP
+hsh main.c shell.c test_ls_2
+.PP
+.IP
+hsh main.c shell.c test_ls_2
+.PP
+.IP
+$
+.PP
+.IP
+Interatcive Mode
+.PP
+.IP
+$ ./hsh
+.PP
+.IP
+($) /bin/ls
+.PP
+.IP
+hsh main.c shell.c
+.PP
+.IP
+($)
+.PP
+.IP
+($) exit
+.PP
+.IP
+$
+.PP
+.SH NOTES
+All files and code used to create our shell (./hsh) were created and compiled on Ubuntu 14.04.4 LTS using GCC 4.8.4
+.SH SEE ALSO
+man sh
+.SH AUTHOR
+Ethan Mayer, and Jun Zhu
