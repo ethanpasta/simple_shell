@@ -29,8 +29,8 @@ void print_env(__attribute__((unused))char **env)
 
 	for (i = 0; env[i]; i++)
 	{
-		_puts(env[i]);
-		_puts("\n");
+		_puts(env[i], 1);
+		_puts("\n", 1);
 	}
 }
 
