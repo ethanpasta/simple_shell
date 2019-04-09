@@ -16,17 +16,69 @@ void exit_shell(built_info_t build)
 }
 
 /**
+ * un_set_env - function that removes the previous initiation of
+ * a environmental varible
+ * @build: the struct we use to stabilize our types
+ *
+ * Return: none
+ */
+
+void un_set_env(built_info_t build)
+{
+	int i;
+	int j;
+	int flag;
+
+	i = 0;
+	flag = 0;
+	if (!build.args[1])
+	{
+		_puts("Error: Usage: unsetenv [VARIABLE]\n", 2);
+		return;
+	}
+	for(i = 0; build.env[i]; i++)
+	{
+		if(find_env_value(build.env, build.args[1]) != NULL)
+		{
+			flag = 1;
+			for (j = i; build.env[j]; j++)
+			{
+				build.env[j] = build.env[j + 1];
+			}
+		}
+	}
+	if (flag == 0)
+		_puts("Error: Environment variable not found\n", 2);
+}
+
+/**
  * set_env - function intitializes a new environment variable,
  * or modifies an existing one
- * @env: array containing all environment variables
- * @var: new variable new, or existing one
- * @val: new variable value
+ * @build: the struct we use to stabilize our types
  *
  * Return: none
  */
 void set_env(built_info_t build)
 {
-	(void)build;
+	char *str;
+	int len;
+
+	if (!build.args[1] || !build.args[2])
+        {
+                _puts("Error: Usage: setenv [VARIABLE][VALUE]\n", 2);
+                return;
+        }
+        un_set_env(build);
+
+        str = malloc(sizeof(char) * (_strlen(build.args[1]) + _strlen(build.args[2]) + 2));
+        if (!str)
+                return;
+	str = _strcpy(str, build.args[1]);
+	str = str_concat(str, "=");
+	str = str_concat(str, build.args[2]);
+	for (len = 0; build.env[len]; len++)
+		;
+	build.env[len - 1] = str;
 }
 
 /**
