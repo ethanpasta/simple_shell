@@ -45,16 +45,21 @@ char **check_create_args(char **buffer, size_t *buffer_size)
 	size_t real_size;
 	char **args;
 
+	/* get input from user and store in buffer */
 	if (getline(buffer, buffer_size, stdin) == -1)
 	{
+		/* if in interactive mode, print a new line */
 		if (isatty(0))
 			_puts("\n", 1);
+		/* exit if Ctrl + D was pressed */
 		exit(0);
 	}
 	real_size = _strlen(*buffer);
 	if (real_size == 1)
 		return (NULL);
+	/* Overwrite newline character (/n) with null character (/0) */
 	(*buffer)[real_size - 1] = '\0';
+	/* split buffer by spaces, into an array of strings */
 	args = strtow(*buffer, ' ');
 	return (args);
 }
