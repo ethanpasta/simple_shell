@@ -11,10 +11,26 @@
  */
 void set_env(char **env, char *var, char *val)
 {
-	(void)env;
-	(void)var;
-	(void)val;
+	int i;
+	char **env_var;
 
+	for (i = 0; env[i]; i++)
+	{
+		env_var = strtow(env[i], '=');
+		if (_strcmp(env_var[0], var))
+		{
+			free(env[i]);
+			env[i] = var;
+			env[i] = str_concat(env[i], "=");
+			env[i] = str_concat(env[i], val);
+		}
+	}
+	env[i] = _realloc(env, i, (i + sizeof(char *)));
+	if (!env[i])
+		return;
+	env[i] = var;
+	env[i] = str_concat(env[i], "=");
+	env[i] = str_concat(env[i], val);
 }
 
 /**
