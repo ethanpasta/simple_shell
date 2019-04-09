@@ -1,6 +1,4 @@
 #include "shell_head.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 /**
  * word_count - function counts amount of words
