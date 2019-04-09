@@ -50,7 +50,7 @@ char **check_create_args(char **buffer, size_t *buffer_size)
 	{
 		if (isatty(0))
 			_puts("\n", 1);
-		exit(98);
+		exit(0);
 	}
 	real_size = _strlen(*buffer);
 	if (real_size == 1)
@@ -65,17 +65,23 @@ char **check_create_args(char **buffer, size_t *buffer_size)
  * execute commands from the user
  * @args: array of arguments from user
  * @built_ins: array of built-in structure
- * @env: environment variable
+ * @av: arguments to file
+ * @line_num: current line number
+ * @child_p: current process
  *
  * Return: none
  */
-void child_proc(char **args, built_t built_ins[], char **env, char **av, size_t line_num)
+void child_proc(char **args, built_t built_ins[], char **av, size_t line_num, pid_t *child_p)
 {
 	char *command;
+	char **env = built_ins[0].info.env;
 
-	/* check if command is a built in */
+	/* check if command is a built in, if it is, go back to main while loop */
 	if (do_built_in(args, env, built_ins) == 1)
-		exit(102);
+		return;
+	*child_p = fork();
+	if (*child_p != 0)
+		return;
 	/* check (and execute) if command is in PATH variable */
 	command = check_file_withP(env, args[0]);
 	if (command && execve(command, args, env) == -1)
