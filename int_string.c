@@ -36,7 +36,8 @@ char *_itoa(size_t num)
 		size++;
 		tmp /= 10;
 	}
-	str = malloc(sizeof(char) * size);
+	str = malloc(sizeof(char) * (size + 1));
+	str[size] = '\0';
 	size--;
 	while (num)
 	{
