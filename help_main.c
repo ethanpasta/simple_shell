@@ -18,7 +18,7 @@ void error_msg(size_t line_num, char **args, char **av)
 
 	if (errno == ENOENT || errno == ENOTDIR)
 	{
-		buff = str_concat(buff, av[0]);
+		buff = av[0];
 		buff = str_concat(buff, ": ");
 		buff = str_concat(buff, _itoa(line_num));
 		buff = str_concat(buff, ": ");
@@ -86,13 +86,13 @@ void child_proc(char **args, built_t built_ins[], char **env, char **av, size_t 
 		exit(102);
 	/* check (and execute) if command is in PATH variable */
 	command = check_file_withP(env, args[0]);
-	if (command && execve(command, args, NULL) == -1)
+	if (command && execve(command, args, env) == -1)
 	{
 		error_msg(line_num, args, av);
 		exit(100);
 	}
 	/* check (and execute) if command on its own is a full command path */
-	if (execve(args[0], args, NULL) == -1)
+	if (execve(args[0], args, env) == -1)
 	{
 		error_msg(line_num, args, av);
 		exit(101);
