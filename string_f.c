@@ -21,17 +21,18 @@ int _strlen(char *str)
 /**
  * _puts - function prints buffer to standard output
  * @buff: string to print
+ * @stand: which standard to print to
  *
  * Return: 1 on success, -1 on failure
  */
-int _puts(char *buff)
+int _puts(char *buff, int stand)
 {
 	size_t len;
 
 	if (!buff)
 		return (-1);
 	len = _strlen(buff);
-	if (write(1, buff, len) == -1)
+	if (write(stand, buff, len) == -1)
 		return (-1);
 	return (1);
 }
