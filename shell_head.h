@@ -15,7 +15,7 @@ typedef struct built_info
 typedef struct built
 {
 	char *built_in;
-	built_info_t info;
+	built_info_t *info;
 	void (*f)(built_info_t);
 } built_t;
 
@@ -24,6 +24,7 @@ int _strlen(char *);
 int _strcmp(char *, char *);
 int _puts(char *, int);
 char **strtow(char *, char);
+char *_strcpy(char *, char *);
 
 /* Functions in string_split.c */
 int word_count(char *, char);
@@ -35,11 +36,11 @@ char *check_file_withP(char **, char *);
 
 /* Functions in built_f.c */
 int do_built_in(char **, char **, built_t[]);
-void print_env(built_info_t);
-void set_env(built_info_t);
-void unset_env(built_info_t);
-void change_dir(built_info_t);
-void exit_shell(built_info_t);
+void print_env(built_info_t *);
+void set_env(built_info_t *);
+void un_set_env(built_info_t *);
+void change_dir(built_info_t *);
+void exit_shell(built_info_t *);
 
 /* Functions in help_main.c */
 char **check_create_args(char **, size_t *);
