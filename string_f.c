@@ -69,15 +69,21 @@ char *str_concat(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
+	/* finding length of both strings */
 	size1 = _strlen(s1);
 	size2 = _strlen(s2);
+	/* create new string, with size of two previous ones plus one for
+	 * null character */
 	s = malloc(sizeof(char) * (size1 + size2 + 1));
 	if (!s)
 		return (NULL);
+	/* copy contents from s1 */
 	while (i < size1)
 		s[pos++] = s1[i++];
+	/* followed by copying contents of s2 */
 	while (j < size2)
 		s[pos++] = s2[j++];
+	/* place null character at end of new string */
 	s[pos] = '\0';
 	return (s);
 }
