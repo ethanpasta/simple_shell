@@ -12,6 +12,8 @@ void error_msg(size_t line_num, char **args, char **av)
 {
 	char *buff = "";
 
+	/* check if one of two special error values, if it is create manual
+	   error message */
 	if (errno == ENOENT || errno == ENOTDIR)
 	{
 		buff = av[0];
@@ -22,6 +24,7 @@ void error_msg(size_t line_num, char **args, char **av)
 		buff = str_concat(buff, ": ");
 		buff = str_concat(buff, "not found");
 		buff = str_concat(buff, "\n");
+		/* print error message to standard error */
 		_puts(buff, 2);
 	}
 	else
