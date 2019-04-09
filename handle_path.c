@@ -14,9 +14,11 @@ char *find_env_value(char **env, char *var)
 
 	for (i = 0; env[i]; i++)
 	{
+		/* splitting current environment variable to [VAR] [VALUE] */
 		var_val = strtow(env[i], '=');
 		env_var = var_val[0];
 		value = var_val[1];
+		/* check if current variable is equal to current input */
 		if (_strcmp(env_var, var))
 			return (value);
 	}
