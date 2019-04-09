@@ -21,6 +21,7 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	size_t line = 0, buffer_size = 32;
 	int i;
+	char *prompt = " :) ";
 	char *buffer, **args;
 	pid_t child_p;
 	built_t built_ins[] = {
@@ -30,20 +31,21 @@ int main(int ac, char **av, char **env)
 		{"cd", NULL},
 		{NULL, NULL}
 	};
-
 	signal(SIGINT, SIG_IGN);
 	buffer = malloc(sizeof(char) * buffer_size);
 	while (1)
 	{
 		line++;
 		if (isatty(0))
-			_puts(" ($) ");
+			_puts(prompt, 2);
 		args = check_create_args(&buffer, &buffer_size);
 		if (args)
 		{
 			child_p = fork();
 			if (child_p == 0)
+			{
 				child_proc(args, built_ins, env, av, line);
+			}
 			else
 			{
 				for (i = 0; args[i]; i++)
