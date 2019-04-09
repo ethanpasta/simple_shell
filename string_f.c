@@ -12,6 +12,7 @@ int _strlen(char *str)
 		return (-1);
 	if (*str == '\0')
 		return (0);
+	/* recursively call function with next character and add one */
 	return (_strlen(str + 1) + 1);
 }
 
