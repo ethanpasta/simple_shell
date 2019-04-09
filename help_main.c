@@ -1,8 +1,4 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "shell_head.h"
-#include <errno.h>
 
 /**
  * error_msg - function writes message to standard error
