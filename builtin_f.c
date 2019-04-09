@@ -62,6 +62,7 @@ void set_env(built_info_t build)
 {
 	char *str;
 	int len;
+	unsigned int size;
 
 	if (!build.args[1] || !build.args[2])
         {
@@ -69,16 +70,24 @@ void set_env(built_info_t build)
                 return;
         }
         un_set_env(build);
-
+	for (len = 0; build.env[len]; len++)
+                ;
+	printf("Current length of env: %d, current size: %lu\n", len, sizeof(char *) * len);
+	size = ((len + 1) * sizeof(char *));
+	printf("New size: %u\n", size);
+	build.env = _realloc(build.env, (len * sizeof(char *)), size);
+	build.env[len] = NULL;
+	printf("build.env[%d] = NULL\n", len);
         str = malloc(sizeof(char) * (_strlen(build.args[1]) + _strlen(build.args[2]) + 2));
         if (!str)
                 return;
-	str = _strcpy(str, build.args[1]);
+	str = str_concat(str, build.args[1]);
 	str = str_concat(str, "=");
 	str = str_concat(str, build.args[2]);
-	for (len = 0; build.env[len]; len++)
-		;
+	printf("build.env[%d] = %s\n", len - 1, str);
 	build.env[len - 1] = str;
+	for (len = 0; build.env[len]; len++)
+		printf("%s\n", build.env[len]);
 }
 
 /**
