@@ -26,12 +26,12 @@ int main(int ac, char **av, char **env)
 	pid_t child_p = 1;
 	built_info_t in;
 	built_t built_ins[] = {
-		{"exit", in, exit_shell},
-		{"env", in, print_env},
-		{"setenv", in, set_env},
-		{"unsetenv", in, NULL},
-		{"cd", in, NULL},
-		{NULL, in, NULL}
+		{"exit", &in, exit_shell},
+		{"env", &in, print_env},
+		{"setenv", &in, set_env},
+		{"unsetenv", &in, un_set_env},
+		{"cd", &in, NULL},
+		{NULL, &in, NULL}
 	};
 	signal(SIGINT, SIG_IGN);
 	buffer = malloc(sizeof(char) * buffer_size);
@@ -45,8 +45,8 @@ int main(int ac, char **av, char **env)
 		{
 			for (i = 0; built_ins[i].f; i++)
 			{
-				built_ins[i].info.args = args;
-				built_ins[i].info.env = env;
+				built_ins[i]->info.args = args;
+				built_ins[i]->info.env = env;
 			}
 			child_proc(args, built_ins, av, line, &child_p);
 			if (child_p != 0)
