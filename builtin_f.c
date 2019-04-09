@@ -6,12 +6,12 @@
  *
  * Return: none
  */
-void exit_shell(built_info_t build)
+void exit_shell(built_info_t *build)
 {
 	int status = 1;
 
-	if (build.args[1])
-		status = _atoi(build.args[1]);
+	if ((*build).args[1])
+		status = _atoi((*build).args[1]);
 	exit(status);
 }
 
@@ -23,7 +23,7 @@ void exit_shell(built_info_t build)
  * Return: none
  */
 
-void un_set_env(built_info_t build)
+void un_set_env(built_info_t *build)
 {
 	int i;
 	int j;
@@ -31,23 +31,23 @@ void un_set_env(built_info_t build)
 
 	i = 0;
 	flag = 0;
-	if (!build.args[1])
+	if (!(*build).args[1])
 	{
 		_puts("Error: Usage: unsetenv [VARIABLE]\n", 2);
 		return;
 	}
-	for(i = 0; build.env[i]; i++)
+	for(i = 0; (*build).env[i]; i++)
 	{
-		if(find_env_value(build.env, build.args[1]) != NULL)
+		if(find_env_value((*build).env, (*build).args[1]) != NULL)
 		{
 			flag = 1;
-			for (j = i; build.env[j]; j++)
+			for (j = i; (*build).env[j]; j++)
 			{
-				build.env[j] = build.env[j + 1];
+				(*build).env[j] = (*build).env[j + 1];
 			}
 		}
 	}
-	if (flag == 0 && _strcmp(build.args[0], "unsetenv"))
+	if (flag == 0 && _strcmp((*build).args[0], "unsetenv"))
 		_puts("Error: Environment variable not found\n", 2);
 }
 
@@ -58,36 +58,36 @@ void un_set_env(built_info_t build)
  *
  * Return: none
  */
-void set_env(built_info_t build)
+void set_env(built_info_t *build)
 {
 	char *str;
 	int len;
 	unsigned int size;
 
-	if (!build.args[1] || !build.args[2])
+	if (!(*build).args[1] || !(*build).args[2])
         {
                 _puts("Error: Usage: setenv [VARIABLE][VALUE]\n", 2);
                 return;
         }
         un_set_env(build);
-	for (len = 0; build.env[len]; len++)
+	for (len = 0; (*build).env[len]; len++)
                 ;
 	printf("Current length of env: %d, current size: %lu\n", len, sizeof(char *) * len);
 	size = ((len + 1) * sizeof(char *));
 	printf("New size: %u\n", size);
-	build.env = _realloc(build.env, (len * sizeof(char *)), size);
-	build.env[len] = NULL;
+	(*build).env = _realloc((*build).env, (len * sizeof(char *)), size);
+	(*build).env[len] = NULL;
 	printf("build.env[%d] = NULL\n", len);
-        str = malloc(sizeof(char) * (_strlen(build.args[1]) + _strlen(build.args[2]) + 2));
+        str = malloc(sizeof(char) * (_strlen((*build).args[1]) + _strlen((*build).args[2]) + 2));
         if (!str)
                 return;
-	str = str_concat(str, build.args[1]);
+	str = str_concat(str, (*build).args[1]);
 	str = str_concat(str, "=");
-	str = str_concat(str, build.args[2]);
+	str = str_concat(str, (*build).args[2]);
 	printf("build.env[%d] = %s\n", len - 1, str);
-	build.env[len - 1] = str;
-	for (len = 0; build.env[len]; len++)
-		printf("%s\n", build.env[len]);
+	(*build).env[len - 1] = str;
+	for (len = 0; (*build).env[len]; len++)
+		printf("%s\n", (*build).env[len]);
 }
 
 /**
@@ -96,13 +96,13 @@ void set_env(built_info_t build)
  *
  * Return: none
  */
-void print_env(built_info_t build)
+void print_env(built_info_t *build)
 {
 	int i;
 
-	for (i = 0; build.env[i];i++)
+	for (i = 0; (*build).env[i];i++)
 	{
-		_puts(build.env[i], 1);
+		_puts((*build).env[i], 1);
 		_puts("\n", 1);
 	}
 }
