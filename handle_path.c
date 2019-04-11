@@ -45,12 +45,12 @@ char *check_file_withP(char **env, char *command)
 		return (NULL);
 	/* if PATH contains ':' in the beginning */
 	if (str[0] == ':' && !stat(command, &st) && !access(command, X_OK))
-		return (str_concat(".//", command));
+		return (str_concat("./", command));
 	/* seperate path directories */
 	pa = strtow(str, ':');
 	for (i = 0; pa[i]; i++)
 	{
-		tmp = str_concat(pa[i], "//");
+		tmp = str_concat(pa[i], "/");
 		/* create path to command */
 		build_path = str_concat(tmp, command);
 		if (stat(build_path, &st) == 0 && access(build_path, X_OK) == 0)
