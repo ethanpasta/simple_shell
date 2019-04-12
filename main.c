@@ -14,17 +14,20 @@ int main(int ac, char **av, char **env)
 	char *prompt = " :) ", *buffer, **args;
 	pid_t child_p = 1;
 	built_info_t *in;
-	in = malloc(sizeof(built_info_t *));
-	built_t built_ins[] = {
-		{"exit", in, exit_shell},
-		{"env", in, print_env},
-		{"setenv", in, set_env},
-		{"unsetenv", in, un_set_env},
-		{NULL, in, NULL}};
+        built_t built_ins[] = {
+                {"exit", 0, exit_shell},
+                {"env", 0, print_env},
+                {"setenv", 0, set_env},
+                {"unsetenv", 0, un_set_env},
+                {NULL, 0, NULL}};
 	(void)ac;
-	(void)av;
+        (void)av;
 	signal(SIGINT, SIG_IGN);
-	buffer = malloc(sizeof(char) * buffer_size);
+        buffer = malloc(sizeof(char) * buffer_size);
+        in = malloc(sizeof(built_info_t *));
+	for (i = 0; built_ins[i].built_in; i++)
+		built_ins[i].info = in;
+
 	while (1)
 	{
 		line++;
