@@ -2,7 +2,7 @@
 
 /**
  * exit_shell - function exits the shell with/without an exit value
- * @status: status to exit with
+ * @build: the struct we use to stabilize our types
  *
  * Return: none
  */
@@ -65,22 +65,22 @@ void set_env(built_info_t *build)
 	unsigned int size;
 
 	if (!(*build).args[1] || !(*build).args[2])
-        {
-                _puts("Error: Usage: setenv [VARIABLE][VALUE]\n", 2);
-                return;
-        }
-        un_set_env(build);
+	{
+		_puts("Error: Usage: setenv [VARIABLE][VALUE]\n", 2);
+		return;
+	}
+	un_set_env(build);
 	for (len = 0; (*build).env[len]; len++)
-                ;
+		;
 	printf("Current length of env: %d, current size: %lu\n", len, sizeof(char *) * len);
 	size = ((len + 1) * sizeof(char *));
 	printf("New size: %u\n", size);
 	(*build).env = _realloc((*build).env, (len * sizeof(char *)), size);
 	(*build).env[len] = NULL;
 	printf("build.env[%d] = NULL\n", len);
-        str = malloc(sizeof(char) * (_strlen((*build).args[1]) + _strlen((*build).args[2]) + 2));
-        if (!str)
-                return;
+	str = malloc(sizeof(char) * (_strlen((*build).args[1]) + _strlen((*build).args[2]) + 2));
+	if (!str)
+		return;
 	str = str_concat(str, (*build).args[1]);
 	str = str_concat(str, "=");
 	str = str_concat(str, (*build).args[2]);
@@ -115,10 +115,10 @@ void print_env(built_info_t *build)
  *
  * Return: 1 on success, 0 otherwise
  */
-int do_built_in(char **args, char **env, built_t a[])
+int do_built_in(char **args, char** env, built_t a[])
 {
-	(void)env;
 	int i;
+	(void)env;
 
 	for (i = 0; a[i].built_in; i++)
 	{
