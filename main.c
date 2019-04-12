@@ -10,12 +10,8 @@
  */
 int main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
-	size_t line = 0, buffer_size = 32;
-	int i;
-	char *prompt = " :) ";
-	char *buffer, **args;
+	size_t line, buffer_size = 32, i;
+	char *prompt = " :) ", *buffer, **args;
 	pid_t child_p = 1;
 	built_info_t *in;
 	in = malloc(sizeof(built_info_t *));
@@ -24,9 +20,9 @@ int main(int ac, char **av, char **env)
 		{"env", in, print_env},
 		{"setenv", in, set_env},
 		{"unsetenv", in, un_set_env},
-		{"cd", in, NULL},
-		{NULL, in, NULL}
-	};
+		{NULL, in, NULL}};
+	(void)ac;
+	(void)av;
 	signal(SIGINT, SIG_IGN);
 	buffer = malloc(sizeof(char) * buffer_size);
 	while (1)
