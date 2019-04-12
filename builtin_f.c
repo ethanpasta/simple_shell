@@ -10,6 +10,7 @@ void exit_shell(built_info_t *build)
 {
 	int status = 1;
 
+	/* check if exited with argument */
 	if ((*build).args[1])
 		status = _atoi((*build).args[1]);
 	exit(status);

@@ -40,9 +40,11 @@ char **strtow(char *str, char del)
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
+	/* finding the amount of words in the string */
 	words = word_count(str, del);
 	if (words == 0)
 		return (NULL);
+	/* malloc new space for array, with every element being a string */
 	a = malloc(sizeof(char *) * (words + 1));
 	if (!a)
 		return (NULL);
@@ -61,6 +63,7 @@ char **strtow(char *str, char del)
 			free(a);
 			return (NULL);
 		}
+		/* for every word, copy on to current position in array */
 		for (j = 0; j < size; j++)
 		{
 			tmpP[j] = str[tmp];
