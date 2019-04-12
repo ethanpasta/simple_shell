@@ -2,7 +2,9 @@
 ## Description
 Write a simple UNIX command interpreter. For this project we are creating our own simple shell using the C programming language. 
 ### Prototype
-`int main(int ac, char **av, char **env)`
+```
+int main(int ac, char **av, char **env)
+```
 ### Example Usage
 * `:) ls -l` - lists all files in your current directory in long format and then prints the prompt on the new line.
 * `:) \bin\ls` - lists all file in your current directory and then prints the prompt on the new line.
@@ -24,10 +26,26 @@ File Name | Description
 [string_split.c](https://github.com/ethanpasta/simple_shell/blob/master/string_split.c) | Where we created our custom built strtok function we name `strtow`.
 ### Compilation
 Our shell can be compiled either this way:
-`gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
+```
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+```
 Or this way:
-`gcc *.c -o hsh`
+```
+gcc *.c -o hsh
+```
+### Output
+* After you compilied the program, you can check to see if you  have the exact same output as sh (/bin/sh) as well as the exact same error output.
+* The only difference is when you print an error, the name of the program must be equivalent to your `argv[0]`.
+```
+:) echo "qwerty" | ./hsh
+./hsh: 1: qwerty: not found
+:) echo "qwerty" | ./././hsh
+./././hsh: 1: qwerty: not found
+:)
+```
 ### Bugs
+### About
+All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
 ### Authors
 - **Ethan Mayer** - [ethanpasta](https://github.com/ethanpasta/simple_shell)
 - **Jun Zhu** - [VieetBubbles](https://github.com/VieetBubbles)
