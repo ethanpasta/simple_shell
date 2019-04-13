@@ -50,7 +50,7 @@ char **check_create_args(char **buffer, size_t *buffer_size)
 	{
 		/* if in interactive mode, print a new line */
 		if (isatty(0))
-			_puts("\n", 1);
+		  _puts("\n", 1);
 		/* exit if Ctrl + D was pressed */
 		exit(0);
 	}
