@@ -10,24 +10,23 @@
  */
 int main(int ac, char **av, char **env)
 {
-	size_t line, buffer_size = 32, i;
+	size_t line = 0, buffer_size = 32;
 	char *prompt = " :) ", *buffer, **args;
 	pid_t child_p = 1;
-	built_info_t *in;
+	built_info_t in;
         built_t built_ins[] = {
-                {"exit", 0, exit_shell},
-                {"env", 0, print_env},
-                {"setenv", 0, set_env},
-                {"unsetenv", 0, un_set_env},
-                {NULL, 0, NULL}};
+                {"exit", exit_shell},
+                {"env", print_env},
+                {"setenv", set_env},
+                {"unsetenv", unset_env},
+                {NULL, NULL}
+	};
 	(void)ac;
         (void)av;
 	signal(SIGINT, SIG_IGN);
         buffer = malloc(sizeof(char) * buffer_size);
-        in = malloc(sizeof(built_info_t *));
-	for (i = 0; built_ins[i].built_in; i++)
-		built_ins[i].info = in;
-
+	in.env = copy_env(env);
+	in.env_s = list_to_array(in.env);
 	while (1)
 	{
 		line++;
@@ -36,20 +35,16 @@ int main(int ac, char **av, char **env)
 		args = check_create_args(&buffer, &buffer_size);
 		if (args)
 		{
-			for (i = 0; built_ins[i].built_in; i++)
-			{
-				built_ins[i].info->args = args;
-				built_ins[i].info->env = env;
-			}
-			child_proc(args, built_ins, av, line, &child_p);
+			in.args = args;
+			child_proc(built_ins, av, line, &child_p, &in);
 			if (child_p != 0)
 			{
-				for (i = 0; args[i]; i++)
-					free(args[i]);
-				free(args);
-				wait(NULL);
+ 				wait(NULL);
 			}
 		}
+		free_array(args);
+		args = NULL;
+		in.args = NULL;
 	}
 	return (0);
 }
