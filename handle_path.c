@@ -17,10 +17,15 @@ char *find_env_value(char **env, char *var)
 		/* splitting current environment variable to [VAR] [VALUE] */
 		var_val = strtow(env[i], '=');
 		env_var = var_val[0];
-		value = var_val[1];
+		value = _strdup(var_val[1]);
 		/* check if current variable is equal to current input */
 		if (_strcmp(env_var, var))
+		{
+			free_array(var_val);
 			return (value);
+		}
+		free_array(var_val);
+		free(value);
 	}
 	return (NULL);
 }
@@ -54,7 +59,15 @@ char *check_file_withP(char **env, char *command)
 		/* create path to command */
 		build_path = str_concat(tmp, command);
 		if (stat(build_path, &st) == 0 && access(build_path, X_OK) == 0)
+		{
+			free(str);
+			free_array(pa);
+			free(tmp);
 			return (build_path);
+		}
 	}
+	free(str);
+	free_array(pa);
+	free(tmp);
 	return (NULL);
 }
