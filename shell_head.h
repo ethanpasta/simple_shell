@@ -6,21 +6,43 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/wait.h>
 #include <signal.h>
+#include <sys/wait.h>
 
-/* Struct definition for built in arguments */
+/**
+ * struct list_t - structure for nodes in a linked list
+ * @str: string in node
+ * @len: length of str
+ * @next: pointer to next node in list
+ */
+typedef struct list_s
+{
+        char *str;
+        unsigned int len;
+        struct list_s *next;
+} list_t;
+
+/**
+ * struct built_info_t - info structure for built-ins commands
+ * @args: array of arguments
+ * @env: linked list of environment variables
+ * @env_s: string of environment variables
+ */
 typedef struct built_info
 {
-	char **args;
-	char **env;
+        char **args;
+        list_t *env;
+	char **env_s;
 } built_info_t;
 
-/* Struct definition for built ins */
+/**
+ * struct build_t - structure for built ins and their functions
+ * @built_in: built-in command string
+ * @f: function pointer to each built-in function
+ */
 typedef struct built
 {
-	char *built_in;
-	built_info_t *info;
+        char *built_in;
 	void (*f)(built_info_t *);
 } built_t;
 
@@ -31,6 +53,10 @@ int _puts(char *, int);
 char **strtow(char *, char);
 char *_strcpy(char *, char *);
 
+/* Functions in string_f2.c */
+char *_strdup(char *);
+void _memcpy(char *, char *, unsigned int);
+
 /* Functions in string_split.c */
 int word_count(char *, char);
 char *str_concat(char *, char *);
@@ -40,23 +66,34 @@ char *find_env_value(char **, char *);
 char *check_file_withP(char **, char *);
 
 /* Functions in built_f.c */
-int do_built_in(char **, char **, built_t[]);
+int do_built_in(built_t *, built_info_t *);
 void print_env(built_info_t *);
 void set_env(built_info_t *);
-void un_set_env(built_info_t *);
+void unset_env(built_info_t *);
 void change_dir(built_info_t *);
 void exit_shell(built_info_t *);
 
 /* Functions in help_main.c */
 char **check_create_args(char **, size_t *);
-void child_proc(char **, built_t *, char **, size_t, pid_t *);
+void child_proc(built_t *, char **, size_t, pid_t *, built_info_t *);
 void error_msg(size_t, char **, char **);
+void free_array(char **);
 
 /* Functions in int_string.c */
 int _atoi(char *);
 char *_itoa(size_t);
 
-/* Functions in realloc.c */
-void *_realloc(void *, unsigned int, unsigned int);
+/* Functions in enviro.c */
+list_t *copy_env(char **);
+char **list_to_array(list_t *);
+
+/* Functions in list_f.c */
+int add_node(list_t **, char *);
+void free_list(list_t *);
+size_t list_len(list_t *);
+void print_list(list_t *);
+
+/* Functions in list_f2.c */
+int remove_node(list_t **, char *);
 
 #endif
