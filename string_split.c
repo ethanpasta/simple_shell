@@ -35,7 +35,7 @@ int word_count(char *s, char del)
  */
 char **strtow(char *str, char del)
 {
-	char **a, *tmpP;
+	char **a;
 	int i = 0, j = 0, pos = 0, size = 0, words = 0, tmp;
 
 	if (str == NULL || *str == '\0')
@@ -48,7 +48,6 @@ char **strtow(char *str, char del)
 	a = malloc(sizeof(char *) * (words + 1));
 	if (!a)
 		return (NULL);
-	j = 0;
 	for (i = 0; i < words; i++)
 	{
 		size = 0;
@@ -57,20 +56,21 @@ char **strtow(char *str, char del)
 		tmp = pos;
 		while (str[pos] && str[pos++] != del)
 			size++;
-		tmpP = malloc(sizeof(char) * (size + 1));
-		if (!tmpP)
+		a[i] = malloc(sizeof(char) * (size + 1));
+		if (!a[i])
 		{
+			while(i--)
+				free(a[i]);
 			free(a);
 			return (NULL);
 		}
 		/* for every word, copy on to current position in array */
 		for (j = 0; j < size; j++)
 		{
-			tmpP[j] = str[tmp];
+			a[i][j] = str[tmp];
 			tmp++;
 		}
-		tmpP[j] = '\0';
-		a[i] = tmpP;
+		a[i][j] = '\0';
 	}
 	a[i] = NULL;
 	return (a);
