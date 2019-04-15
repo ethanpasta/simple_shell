@@ -33,13 +33,7 @@ void unset_env(built_info_t *build)
 		_puts("Error: Usage: unsetenv [VARIABLE]\n", 2);
 		return;
 	}
-	if (remove_node(&build->env, build->args[1]) == 0)
-	{
-		_puts("Error: Environment variable ", 2);
-		_puts(build->args[1], 2);
-		_puts(" not found\n", 2);
-		return;
-	}
+	help_unsetenv(&build->env, build->args[1]);
 	free_array(build->env_s);
         build->env_s = list_to_array(build->env);
 }
@@ -53,33 +47,12 @@ void unset_env(built_info_t *build)
  */
 void set_env(built_info_t *build)
 {
-	char *str, *val;
-	int len1, len2;
-
-	if (!build->args[1] || !build->args[2])
-        {
-                _puts("Error: Usage: setenv [VARIABLE] [VALUE]\n", 2);
-                return;
-        }
-	val = find_env_value(build->env_s, build->args[1]);
-	if (val)
+	if (!build->args[1] || !build->args[2] || build->args[3] != NULL)
 	{
-		free(val);
-		remove_node(&build->env, build->args[1]);
-	}
-	len1 = _strlen(build->args[1]);
-	len2 = _strlen(build->args[2]);
-	str = malloc(sizeof(char) * (len1 + len2 + 2));
-	_memcpy(str, build->args[1], len1);
-	_memcpy(str + len1, "=", 1);
-	_memcpy(str + len1 + 1, build->args[2], len2 + 1);
-	if (!add_node(&build->env, str))
-	{
-		free(str);
-		_puts("Error: could not set environment variable\n", 2);
+		_puts("Error: Usage: setenv [VARIABLE] [VALUE]\n", 2);
 		return;
 	}
-	free(str);
+	help_setenv(&build->env, build->args[1], build->args[2]);
 	free_array(build->env_s);
 	build->env_s = list_to_array(build->env);
 }
