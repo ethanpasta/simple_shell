@@ -14,6 +14,14 @@ Or this way:
 ```
 gcc *.c -o hsh
 ```
+### Entering the Shell
+Once compiled, the executable file `./hsh` can be used to enter our custom shell. Your output for the shell should look something like this:
+```
+$ ./hsh
+:)
+```
+
+Once the prompt (`:)`) shows up and not a `$`, then you'll know that the custom-built shell is working.
 
 ### Example Usage
 * `:) ls -l` - lists all files in your current directory in long format and then prints the prompt on the new line.
@@ -114,7 +122,7 @@ All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
 - **Ethan Mayer** - [ethanpasta](https://github.com/ethanpasta/simple_shell)
 - **Jun Zhu** - [VieetBubbles](https://github.com/VieetBubbles)
 ### Acknowledgments
-- **Tu Vu**
-- **Jason Cortella**
-- **Laura Roudge**
-- **Arthur Damm**
+- **Tu Vu** - [tuvo1106](https://github.com/tuvo1106)
+- **Jason Cortella** - [jasoncortella](https://github.com/jasoncortella)
+- **Laura Roudge** - [lroudge](https://github.com/lroudge)
+- **Arthur Damm** - [arthurdamm](https://github.com/arthurdamm)
