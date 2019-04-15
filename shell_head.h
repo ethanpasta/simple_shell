@@ -96,4 +96,11 @@ void print_list(list_t *);
 /* Functions in list_f2.c */
 int remove_node(list_t **, char *);
 
+/* Functions in modify_env.c */
+void help_setenv(list_t **, char *, char *);
+void help_unsetenv(list_t **, char *);
+
+/* Functions in built_f2.c */
+void change_dir(built_info_t *);
+
 #endif
