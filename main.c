@@ -19,6 +19,7 @@ int main(int ac, char **av, char **env)
                 {"env", print_env},
                 {"setenv", set_env},
                 {"unsetenv", unset_env},
+		{"cd", change_dir},
                 {NULL, NULL}
 	};
 	(void)ac;
