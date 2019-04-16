@@ -9,13 +9,31 @@
 void exit_shell(built_info_t *build)
 {
 	int status = 1;
+	char *bet = ": ", *line;
 
 	/* check if exited with argument */
 	if (build->args[1])
+	{
 		status = _atoi(build->args[1]);
+		if (status == -1)
+		{
+			_puts(build->filename, 2);
+			_puts(bet, 2);
+			line = _itoa(build->line_num);
+			_puts(line, 2);
+			_puts(bet, 2);
+			_puts("exit: ", 2);
+			_puts("Illegal number: ", 2);
+			_puts(build->args[1], 2);
+			_puts("\n", 2);
+			free(line);
+			return;
+		}
+	}
 	free_list(build->env);
 	free_array(build->env_s);
 	free_array(build->args);
+	free_list(build->args_l);
 	exit(status);
 }
 
@@ -30,12 +48,13 @@ void unset_env(built_info_t *build)
 {
 	if (!build->args[1] || build->args[2] != NULL)
 	{
-		_puts("Error: Usage: unsetenv [VARIABLE]\n", 2);
+		errno = EINVAL;
+		perror(build->args[0]);
 		return;
 	}
 	help_unsetenv(&build->env, build->args[1]);
 	free_array(build->env_s);
-        build->env_s = list_to_array(build->env);
+	build->env_s = list_to_array(build->env);
 }
 
 /**
@@ -49,7 +68,8 @@ void set_env(built_info_t *build)
 {
 	if (!build->args[1] || !build->args[2] || build->args[3] != NULL)
 	{
-		_puts("Error: Usage: setenv [VARIABLE] [VALUE]\n", 2);
+		errno = EINVAL;
+		perror(build->args[0]);
 		return;
 	}
 	help_setenv(&build->env, build->args[1], build->args[2]);

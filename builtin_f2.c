@@ -1,6 +1,28 @@
 #include "shell_head.h"
 
 /**
+ * change_dir_error - function to display error message for the cd command
+ * @build: built in info structure
+ *
+ * Return: none
+ */
+void change_dir_error(built_info_t build)
+{
+	char *linenum, *bet = ": ";
+
+	_puts(build.filename, 2);
+	_puts(bet, 2);
+	linenum = _itoa(build.line_num);
+	_puts(linenum, 2);
+	_puts(bet, 2);
+	_puts("cd: ", 2);
+	_puts("can't cd to ", 2);
+	_puts(build.args[1], 2);
+	_puts("\n", 2);
+	free(linenum);
+}
+
+/**
  * change_dir - function changes the current directory
  * @build: built in info structure
  *
@@ -26,9 +48,7 @@ void change_dir(built_info_t *build)
 	getcwd(buff, 1024);
 	if (chdir(newdir) == -1)
 	{
-		_puts("Error: could not change current directory to [", 2);
-		_puts(newdir, 2);
-		_puts("]\n", 2);
+		change_dir_error(*build);
 		free(newdir);
 		return;
 	}
@@ -41,5 +61,5 @@ void change_dir(built_info_t *build)
 	help_setenv(&build->env, "PWD", newdir);
 	free(newdir);
 	free_array(build->env_s);
-        build->env_s = list_to_array(build->env);
+	build->env_s = list_to_array(build->env);
 }

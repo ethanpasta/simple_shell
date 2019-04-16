@@ -72,8 +72,8 @@ char *str_concat(char *s1, char *s2)
 	/* finding length of both strings */
 	size1 = _strlen(s1);
 	size2 = _strlen(s2);
-	/* create new string, with size of two previous ones plus one for
-	 * null character */
+	/* create new string, with size of two previous ones plus one for */
+	/* null character */
 	s = malloc(sizeof(char) * (size1 + size2 + 1));
 	if (!s)
 		return (NULL);

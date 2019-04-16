@@ -59,7 +59,7 @@ char **strtow(char *str, char del)
 		a[i] = malloc(sizeof(char) * (size + 1));
 		if (!a[i])
 		{
-			while(i--)
+			while (i--)
 				free(a[i]);
 			free(a);
 			return (NULL);

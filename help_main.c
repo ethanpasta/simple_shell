@@ -19,38 +19,23 @@ void free_array(char **arr)
 
 /**
  * error_msg - function writes message to standard error
- * @line_num: number of line on exit
- * @args: array of arguments
- * @av: array of arguments passed to file
+ * @build: built in info structure
  *
  * Return: none
  */
-void error_msg(size_t line_num, char **args, char **av)
+void error_msg(built_info_t build)
 {
-	char *buff = "";
-	char *line;
+	char *bet = ": ";
+	char *line_s = _itoa(build.line_num);
 
-	/* check if one of two special error values, if it is create manual
-	   error message */
-	if (errno == ENOENT || errno == ENOTDIR)
-	{
-		buff = av[0];
-		buff = str_concat(buff, ": ");
-		line = _itoa(line_num);
-		buff = str_concat(buff, line);
-		free(line);
-		buff = str_concat(buff, ": ");
-		buff = str_concat(buff, args[0]);
-		buff = str_concat(buff, ": ");
-		buff = str_concat(buff, "not found");
-		buff = str_concat(buff, "\n");
-		/* print error message to standard error */
-		_puts(buff, 2);
-		free(buff);
-	}
-	else
-		perror(args[0]);
-
+	_puts(build.filename, 2);
+	_puts(bet, 2);
+	_puts(line_s, 2);
+	_puts(bet, 2);
+	_puts(build.args[0], 2);
+	_puts(bet, 2);
+	_puts("not found\n", 2);
+	free(line_s);
 }
 
 /**
@@ -71,7 +56,7 @@ char **check_create_args(char **buffer, size_t *buffer_size)
 	{
 		/* if in interactive mode, print a new line */
 		if (isatty(0))
-		  _puts("\n", 1);
+			_puts("\n", 1);
 		/* exit if Ctrl + D was pressed */
 		exit(0);
 	}
@@ -91,17 +76,16 @@ char **check_create_args(char **buffer, size_t *buffer_size)
  * child_proc - function takes care of child process. Tries to
  * execute commands from the user
  * @built_ins: array of built-in structure
- * @av: arguments to file
- * @line_num: current line number
- * @child_p: current process
+ * @child_p: child process id
  * @in: built in info structure
  *
  * Return: none
  */
-void child_proc(built_t built_ins[], char **av, size_t line_num, pid_t *child_p, built_info_t *in)
+void child_proc(built_t built_ins[], pid_t *child_p, built_info_t *in)
 {
 	char *command;
 
+	var_replace(in);
 	/* check if command is a built in, if it is, go back to main while loop */
 	if (do_built_in(built_ins, in))
 	{
@@ -116,13 +100,19 @@ void child_proc(built_t built_ins[], char **av, size_t line_num, pid_t *child_p,
 	command = check_file_withP(in->env_s, in->args[0]);
 	if (command && execve(command, in->args, in->env_s) == -1)
 	{
-		error_msg(line_num, in->args, av);
-		exit(0);
+		if (errno == ENOENT || errno == ENOTDIR)
+			error_msg(*in);
+		else
+			perror(in->args[0]);
+		exit(127);
 	}
 	/* check (and execute) if command on its own is a full command path */
 	if (execve(in->args[0], in->args, in->env_s) == -1)
 	{
-		error_msg(line_num, in->args, av);
-		exit(0);
+		if (errno == ENOENT || errno == ENOTDIR)
+			error_msg(*in);
+		else
+			perror(in->args[0]);
+		exit(127);
 	}
 }
