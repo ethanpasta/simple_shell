@@ -128,7 +128,7 @@ Each one of our custom built-in functions can be compared to the actual shell ou
   * If no argument is given to `cd` the command will be interpreted like `cd $HOME`.
 
 ### Bugs
-Our custom-made shell is not perfect. It has some memory leaks.
+Our custom-made shell is not perfect. It has some memory leaks. As well as the `setenv` and `unsetenv` wil not work as expected when compared to their C library versions.
 
 ### About
 All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
