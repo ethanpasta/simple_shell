@@ -34,10 +34,12 @@ void change_dir(built_info_t *build)
 	char buff[1024];
 	int which = 0;
 
+	/* if cd was entered with no arguments, go to home directory */
 	if (!build->args[1])
 		newdir = find_env_value(build->env_s, "HOME");
 	else if (_strcmp(build->args[1], "-") && build->args[2] == NULL)
 	{
+		/* if cd was entered with '-', go to previous working directory */
 		newdir = find_env_value(build->env_s, "OLDPWD");
 		which = 1;
 	}
@@ -57,6 +59,7 @@ void change_dir(built_info_t *build)
 		_puts(newdir, 1);
 		_puts("\n", 1);
 	}
+	/* changes environment variable values once working directory was changed */
 	help_setenv(&build->env, "OLDPWD", buff);
 	help_setenv(&build->env, "PWD", newdir);
 	free(newdir);
