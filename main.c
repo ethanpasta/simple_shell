@@ -43,7 +43,7 @@ void arg_error(char **av)
 int main(int __attribute__((unused))ac, char **av, char **env)
 {
 	size_t buffer_size = 32;
-	char *prompt = " :) ", *buffer;
+	char *prompt = "$", *buffer;
 	pid_t child_p = 1;
 	int status = 0;
 	built_info_t in;
