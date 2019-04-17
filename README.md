@@ -39,19 +39,21 @@ File Name | Description
 --- | ---
 [AUTHORS](https://github.com/ethanpasta/simple_shell/blob/master/AUTHORS) | This file store the contact info of all individuals who contributed to the branches of our shell code, 
 [builtin_f.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f.c) | This file is where we stord all the code we wrote for our built-in commands. It contains the code for the functions `print_env`, `exit`, `setenv` and `unsetenv`. As well as the `do_built_in` function that goes through our array of functions o search for the correct built-ins.
-[enviro.c](https://github.com/ethanpasta/simple_shell/blob/B/enviro.c) | Contains 2 functions that handles copying the current environmental variable into a linked list and how to convert a linked list to an array.
+[builtin_f2.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f2.c) | File that contains more buit-in functions. Specifically, the `cd` builtin for change directory.
 [handle_path.c](https://github.com/ethanpasta/simple_shell/blob/master/handle_path.c) | Contains 2 functions that handle the PATH environmental variable. The `find_env_value` function returns the PATH in the env, while the `check_file_withP` function will check if the command exist inside the PATH directories.
 [help_main.c](https://github.com/ethanpasta/simple_shell/blob/master/help_main.c) | All the functions we used in pur `main.c` file is inside this file. 
 [int_string.c](https://github.com/ethanpasta/simple_shell/blob/master/int_string.c) | Where we placed our `_atoi` and `_itoa` functions.
+[list_array.c](https://github.com/ethanpasta/simple_shell/blob/master/list_array.c) | The file that contains our 2 functions to converts an array of strings into a linked list and vice versa converts linked list to an array of strings.
 [list_f.c](https://github.com/ethanpasta/simple_shell/blob/B/list_f.c) | The file that contains the 1st half of all the functions concerning the topic of linked lists.
 [list_f2.c](https://github.com/ethanpasta/simple_shell/blob/B/list_f2.c) | The file that contains the 2st half of all the functions concerning the topic of linked lists.
 [main.c](https://github.com/ethanpasta/simple_shell/blob/master/main.c) | Our entry point for the simple shell. This where the main stroke of our shell will start from.
 [man_1_simple_shell](https://github.com/ethanpasta/simple_shell/blob/master/man_1_simple_shell) | The man page for our simple shell. Type in `man ./man_1_simple_shell` to see the man page on your editor.
-[realloc.c](https://github.com/ethanpasta/simple_shell/blob/master/realloc.c) | The file where the `_realloc` function is written.
+[modify_env.c](https://github.com/ethanpasta/simple_shell/blob/master/modify_env.c) | Contains 2 helper functions that are used for our `setenv` and `unsetenv` built-in functions.
 [shell_head.h](https://github.com/ethanpasta/simple_shell/blob/master/shell_head.h) | Our header file that contains all the libraies we used and all our prototypes we created. As well as the 2 structs we created.
 [string_f.c](https://github.com/ethanpasta/simple_shell/blob/master/string_f.c) | This where all our custom built string functions are stored. i.e `_strlen`, `_puts`
 [string_f2.c](https://github.com/ethanpasta/simple_shell/blob/B/string_f2.c) | Another file that contains more functions that are related to strings.
 [string_split.c](https://github.com/ethanpasta/simple_shell/blob/master/string_split.c) | Where we created our custom built strtok function we name `strtow`.
+[var_replace.c](https://github.com/ethanpasta/simple_shell/blob/master/var_replace.c) | This is the file that contains the function that handles variable replacements. Mainly, used for the `echo $?` command.
 
 ### Output
 * After you compilied the program, you can check to see if you  have the exact same output as `sh` (`/bin/sh`) as well as the exact same error output.
