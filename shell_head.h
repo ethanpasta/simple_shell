@@ -54,6 +54,10 @@ typedef struct built
 	void (*f)(built_info_t *);
 } built_t;
 
+/* Functions in main.c */
+void free_stuff(built_info_t *, char *);
+void arg_error(char **);
+
 /* Functions in string_f.c */
 int _strlen(char *);
 int _strcmp(char *, char *);
@@ -82,7 +86,7 @@ void change_dir(built_info_t *);
 void exit_shell(built_info_t *);
 
 /* Functions in help_main.c */
-char **check_create_args(char **, size_t *);
+char **check_create_args(char **, size_t *, built_info_t *);
 void child_proc(built_t *, pid_t *, built_info_t *);
 void error_msg(built_info_t);
 void free_array(char **);
