@@ -1,6 +1,25 @@
 #include "shell_head.h"
 
 /**
+ * arg_error - function displays error message if arguments are passed to shell
+ * @av: main array of arguments
+ *
+ * Return: none
+ */
+void arg_error(char **av)
+{
+	char *bet = ": ";
+
+	_puts(av[0], 2);
+	_puts(bet, 2);
+	_puts("0: ", 2);
+	_puts("Can't open ", 2);
+	_puts(av[1], 2);
+	_puts("\n", 2);
+	exit(127);
+}
+
+/**
  * main - entry point
  * @ac: number of arguments
  * @av: array of arguments
@@ -31,6 +50,8 @@ int main(int ac, char **av, char **env)
 	in.last_return = 0;
 	in.line_num = 0;
 	in.filename = av[0];
+	if (av[1])
+		arg_error(av);
 	while (1)
 	{
 		in.line_num++;

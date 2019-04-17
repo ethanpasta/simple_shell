@@ -125,4 +125,8 @@ All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
 - **Tu Vu** - [tuvo1106](https://github.com/tuvo1106)
 - **Jason Cortella** - [jasoncortella](https://github.com/jasoncortella)
 - **Laura Roudge** - [lroudge](https://github.com/lroudge)
+<<<<<<< HEAD
 - **Arthur Damm** - [arthurdamm](https://github.com/arthurdamm)
+=======
+- **Arthur Damm** - [arthurdamm](https://github.com/arthurdamm)
+>>>>>>> dev
