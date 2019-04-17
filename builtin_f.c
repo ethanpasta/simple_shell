@@ -15,6 +15,8 @@ void exit_shell(built_info_t *build)
 	if (build->args[1])
 	{
 		status = _atoi(build->args[1]);
+		/* check if error message is valid, if not */
+		/* then display custom error message */
 		if (status == -1)
 		{
 			_puts(build->filename, 2);
@@ -32,6 +34,7 @@ void exit_shell(built_info_t *build)
 	}
 	else
 		status = build->last_return;
+	/* free all arrays and lists before exiting */
 	free_list(build->env);
 	free_array(build->env_s);
 	free_array(build->args);
