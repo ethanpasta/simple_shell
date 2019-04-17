@@ -58,6 +58,7 @@ void unset_env(built_info_t *build)
 		return;
 	}
 	help_unsetenv(&build->env, build->args[1]);
+/* erasing and copying the modified list to a regular array of strings */
 	free_array(build->env_s);
 	build->env_s = list_to_array(build->env);
 }
@@ -78,6 +79,7 @@ void set_env(built_info_t *build)
 		return;
 	}
 	help_setenv(&build->env, build->args[1], build->args[2]);
+	/* erasing and copying the modified list to a regular array of strings */
 	free_array(build->env_s);
 	build->env_s = list_to_array(build->env);
 }
