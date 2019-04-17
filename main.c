@@ -74,12 +74,12 @@ int main(int __attribute__((unused))ac, char **av, char **env)
 		{
 			in.args_l = array_to_list(in.args);
 			child_proc(built_ins, &child_p, &in);
+			free_array(in.args);
+			free_list(in.args_l);
 		}
 		if (child_p != 0)
 			wait(&status);
 		if (WIFEXITED(status))
 			in.last_return = WEXITSTATUS(status);
-		free_array(in.args);
-		free_list(in.args_l);
 	}
 }

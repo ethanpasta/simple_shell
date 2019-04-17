@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include <limits.h>
 
 /**
  * struct list_s - structure for nodes in a linked list

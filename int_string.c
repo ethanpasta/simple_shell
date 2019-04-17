@@ -23,15 +23,21 @@ int check_digits(char *str)
  */
 int _atoi(char *s)
 {
-	int i = 0, num = 0;
+	int i = 0;
+	unsigned int num = 0;
 
 	if (check_digits(s) == 0)
 		return (-1);
-	while (s[i] <= '9' && s[i] >= '0')
+	while (s[i])
 	{
 		num = num * 10;
 		num = num + (s[i] - '0');
 		i++;
+		if (num > INT_MAX)
+		{
+			printf("too big\n");
+			return (-1);
+		}
 	}
 	return (num);
 }
