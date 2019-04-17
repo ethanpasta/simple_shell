@@ -30,7 +30,7 @@ Once the prompt (`$`) shows up and not the previous `$`, then you'll know that t
 * `$ exit` - exits out of the shell followed by a new line.
 
 ### Exiting the Shell
-To exit out of our custom shell. You can use either `CTRL + D`, or `CTRL + Z` or by typing in the built-in `exit` to the command line after the `:)` prompt.
+To exit out of our custom shell. You can use either `CTRL + D`, or `CTRL + Z` or by typing in the built-in `exit` to the command line after the `$` prompt.
 
 Do take note that our shell ignores the `CTRL + C` signal. As such, when entered the shell will print out the signal as `^C` and still keep you inside the shell in interactive mode. Please use the 3 above inputs to exit our shell safely. 
 
