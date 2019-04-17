@@ -30,6 +30,8 @@ void exit_shell(built_info_t *build)
 			return;
 		}
 	}
+	else
+		status = build->last_return;
 	free_list(build->env);
 	free_array(build->env_s);
 	free_array(build->args);
