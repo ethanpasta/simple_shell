@@ -18,16 +18,16 @@ gcc *.c -o hsh
 Once compiled, the executable file `./hsh` can be used to enter our custom shell. Your output for the shell should look something like this:
 ```
 $ ./hsh
-:)
+($)
 ```
 
-Once the prompt (`:)`) shows up and not a `$`, then you'll know that the custom-built shell is working.
+Once the prompt (`$`) shows up and not the previous `$`, then you'll know that the custom-built shell is working.
 
 ### Example Usage
-* `:) ls -l` - lists all files in your current directory in long format and then prints the prompt on the new line.
-* `:) \bin\ls` - lists all file in your current directory and then prints the prompt on the new line.
-* `:) env` - prints a list of the current environment variables.
-* `:) exit` - exits out of the shell followed by a new line.
+* `$ ls -l` - lists all files in your current directory in long format and then prints the prompt on the new line.
+* `$ \bin\ls` - lists all file in your current directory and then prints the prompt on the new line.
+* `$ env` - prints a list of the current environment variables.
+* `$ exit` - exits out of the shell followed by a new line.
 
 ### Exiting the Shell
 To exit out of our custom shell. You can use either `CTRL + D`, or `CTRL + Z` or by typing in the built-in `exit` to the command line after the `:)` prompt.
@@ -55,23 +55,30 @@ File Name | Description
 
 ### Output
 * After you compilied the program, you can check to see if you  have the exact same output as `sh` (`/bin/sh`) as well as the exact same error output.
+```
+$ echo "qwerty" | /bin/sh
+/bin/sh: 1: qwerty: not found
+$ echo "qwerty" | /bin/../bin/sh
+/bin/../bin/sh: 1: qwerty: not found
+$
+```
 * The only difference is when you print an error, the name of the program must be equivalent to your `argv[0]`.
 ```
-:) echo "qwerty" | ./hsh
+$ echo "qwerty" | ./hsh
 ./hsh: 1: qwerty: not found
-:) echo "qwerty" | ./././hsh
+$ echo "qwerty" | ./././hsh
 ./././hsh: 1: qwerty: not found
-:)
+$
 ```
 
 ### Interactive Mode
 Our shell should work like this in interactive mode:
 ```
 $ ./hsh
-:) /bin/ls
+($) /bin/ls
 AUTHORS handle_path.c  int_string.c  main.c
-:)
-:) exit
+($)
+($) exit
 $
 ```
 
@@ -95,23 +102,28 @@ Here are the list of built-in commands we made for our custom shell. Included in
 
 Each one of our custom built-in functions can be compared to the actual shell output for testing purposes using the `sh` command outside of our custom shell. With `sh` you can see if our built-in replicates the same output as a actual would.
 * **exit**
-  * Usage - `:) exit` or `:) exit 98`
+  * Usage - `$ exit` or `$ exit 98`
   * When entered, it will Exit the user out of our custom shell.
   * You can doubl check if the built-in command worked by typing in `echo $?` and see if the out is the number you typed after the `exit` built-in. If the default `exit` is used, the number will always be 1. 
 
 * **env**
-  * Usage - `:) env`
+  * Usage - `$ env`
   * When entered, it will Print the current environment.
 
 * **setenv**
-  * Usage - `:) setenv [VARIABLE] [VALUE]`
+  * Usage - `$ setenv [VARIABLE] [VALUE]`
   * When entered, it will initialize a new environment variable, or modify an existing one.
   * Should print something on stderr upon failure.
 
 * **unsetenv**
-  * Usage - `:) unsetenv [VARIABLE]`
+  * Usage - `$ unsetenv [VARIABLE]`
   * When entered, it will remove an environment variable.
   * Should print something on stderr upon failure.
+
+* **cd**
+  * Usage - `$ cd [DIRECTORY]`
+  * When entered, it will change the current directory of the process.
+  * If no argument is given to `cd` the command will be interpreted like `cd $HOME`.
 
 ### Bugs
 Our custom-made shell is not perfect. It has some memory leaks.
@@ -125,8 +137,4 @@ All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
 - **Tu Vu** - [tuvo1106](https://github.com/tuvo1106)
 - **Jason Cortella** - [jasoncortella](https://github.com/jasoncortella)
 - **Laura Roudge** - [lroudge](https://github.com/lroudge)
-<<<<<<< HEAD
 - **Arthur Damm** - [arthurdamm](https://github.com/arthurdamm)
-=======
-- **Arthur Damm** - [arthurdamm](https://github.com/arthurdamm)
->>>>>>> dev
