@@ -1,6 +1,19 @@
 #include "shell_head.h"
 
 /**
+ * free_stuff - function frees arrays and lists
+ * @build: built in info structure
+ *
+ * Return: none
+ */
+void free_stuff(built_info_t *build, char *buffer)
+{
+	free_list(build->env);
+	free_array(build->env_s);
+	free(buffer);
+}
+
+/**
  * arg_error - function displays error message if arguments are passed to shell
  * @av: main array of arguments
  *
@@ -56,7 +69,7 @@ int main(int __attribute__((unused))ac, char **av, char **env)
 		in.line_num++;
 		if (isatty(0))
 			_puts(prompt, 2);
-		in.args = check_create_args(&buffer, &buffer_size);
+		in.args = check_create_args(&buffer, &buffer_size, &in);
 		if (in.args)
 		{
 			in.args_l = array_to_list(in.args);
