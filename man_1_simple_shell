@@ -42,7 +42,7 @@ cd - When entered, it will change the current directory of the process. If no ar
 .PP
 
 .SH BUGS
-Our shell has memory leaks. Please use at your own risk.
+Our shell has memory leaks. Please use at your own risk. As well as the setenv and unsetenv wil not work as expected when compared to their C library versions.
 .PP
 .SH EXAMPLE
 .IP
