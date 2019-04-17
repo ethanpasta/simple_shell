@@ -27,7 +27,7 @@ void arg_error(char **av)
  *
  * Return: exit status
  */
-int main(int ac, char **av, char **env)
+int main(int __attribute__((unused))ac, char **av, char **env)
 {
 	size_t buffer_size = 32;
 	char *prompt = " :) ", *buffer;
@@ -42,7 +42,6 @@ int main(int ac, char **av, char **env)
 		{"cd", change_dir},
 		{NULL, NULL}
 	};
-	(void)ac;
 	signal(SIGINT, SIG_IGN);
 	buffer = malloc(sizeof(char) * buffer_size);
 	in.env = array_to_list(env);
@@ -70,5 +69,4 @@ int main(int ac, char **av, char **env)
 		free_array(in.args);
 		free_list(in.args_l);
 	}
-	return (0);
 }
