@@ -43,10 +43,11 @@ void error_msg(built_info_t build)
  * is to exit, otherwise creates an array of arguments
  * @buffer: the buffer to use for getline
  * @buffer_size: size of the buffer
+ * @in: built in info structure
  *
  * Return: array of arguments
  */
-char **check_create_args(char **buffer, size_t *buffer_size)
+char **check_create_args(char **buffer, size_t *buffer_size, built_info_t *in)
 {
 	size_t real_size;
 	char **args;
@@ -57,6 +58,7 @@ char **check_create_args(char **buffer, size_t *buffer_size)
 		/* if in interactive mode, print a new line */
 		if (isatty(0))
 			_puts("\n", 1);
+		free_stuff(in, *buffer);
 		/* exit if Ctrl + D was pressed */
 		exit(0);
 	}
