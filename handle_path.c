@@ -31,6 +31,24 @@ char *find_env_value(char **env, char *var)
 }
 
 /**
+ * current_dir - function checks if the current directory is in the PATH
+ * @val: string of PATH
+ *
+ * Return: 1 if true, 0 otherwise
+ */
+int current_dir(char *val)
+{
+	int i;
+
+	if (val[0] == ':' || val[_strlen(val) - 1] == ':')
+		return (1);
+	for (i = 0; val[i] && val[i + 1]; i++)
+		if (val[i] == ':' && val[i + 1] == ':')
+			return (1);
+	return (0);
+}
+
+/**
  * check_file_withP - function checks if command is in one of the
  * PATH directories
  * @env: environment variable
@@ -49,7 +67,7 @@ char *check_file_withP(char **env, char *command)
 	if (!str)
 		return (NULL);
 	/* if PATH contains ':' in the beginning */
-	if (str[0] == ':' && !stat(command, &st) && !access(command, X_OK))
+	if (current_dir(str) && !stat(command, &st) && !access(command, X_OK))
 		return (str_concat("./", command));
 	/* seperate path directories */
 	pa = strtow(str, ':');

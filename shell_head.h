@@ -77,6 +77,7 @@ char *str_concat(char *, char *);
 /* Functions in handle_path.c */
 char *find_env_value(char **, char *);
 char *check_file_withP(char **, char *);
+int current_dir(char *);
 
 /* Functions in built_f.c */
 int do_built_in(built_t *, built_info_t *);
