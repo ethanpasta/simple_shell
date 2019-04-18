@@ -66,7 +66,7 @@ char *check_file_withP(char **env, char *command)
 	str = find_env_value(env, "PATH");
 	if (!str)
 		return (NULL);
-	/* if PATH contains ':' in the beginning */
+	/* if PATH contains ':' somewhere in the string */
 	if (current_dir(str) && !stat(command, &st) && !access(command, X_OK))
 		return (str_concat("./", command));
 	/* seperate path directories */
@@ -83,9 +83,10 @@ char *check_file_withP(char **env, char *command)
 			free(tmp);
 			return (build_path);
 		}
+		free(tmp);
+		free(build_path);
 	}
 	free(str);
 	free_array(pa);
-	free(tmp);
 	return (NULL);
 }
