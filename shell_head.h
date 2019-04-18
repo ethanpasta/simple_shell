@@ -56,7 +56,7 @@ typedef struct built
 } built_t;
 
 /* Functions in main.c */
-void free_stuff(built_info_t *, char *);
+void free_stuff(built_info_t *);
 void arg_error(char **);
 
 /* Functions in string_f.c */
