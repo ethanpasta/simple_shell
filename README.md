@@ -1,9 +1,9 @@
 # simple_shell
-A very simple UNIX command interpreter.
+A simple UNIX command interpreter.
 ## Description
-Write a simple UNIX command interpreter. For this project we are creating our own simple shell using the C programming language. Our shell can read commands inputed into the command as files or standard input and executes them. In short, we created a sub-shell that your computer can run inside it's shell. A shell within a shell.
+This project was created as part of the third month curriculum at [Holberton School](https://www.holbertonschool.com/), San Francisco. In short, we we're required to write a UNIX command interpreter. Our shell replicates (to a certain degree) the `sh` shell. 
 
-Due to it's simplicity, our custom-built shell does not 100% replicate the actual shell used on a computer. This project is a guide to how our custom shell works and what built-ins and commands it currently contains.
+Due to it's simplicity, our custom-built shell has some of the functionalities of a normal shell, but not all of them. Down below we will describe each feature our shell contains.
 
 ### Compilation
 Our shell can be compiled either this way:
@@ -30,7 +30,7 @@ Once the prompt (`$`) shows up and not the previous `$`, then you'll know that t
 * `$ exit` - exits out of the shell followed by a new line.
 
 ### Exiting the Shell
-To exit out of our custom shell. You can use either `CTRL + D`, or `CTRL + Z` or by typing in the built-in `exit` to the command line after the `$` prompt.
+To exit out of our custom shell, you can use either `CTRL + D`, or `CTRL + Z` or by typing in the built-in `exit` to the command line after the `$` prompt.
 
 Do take note that our shell ignores the `CTRL + C` signal. As such, when entered the shell will print out the signal as `^C` and still keep you inside the shell in interactive mode. Please use the 3 above inputs to exit our shell safely. 
 
@@ -56,7 +56,8 @@ File Name | Description
 [var_replace.c](https://github.com/ethanpasta/simple_shell/blob/master/var_replace.c) | This is the file that contains the function that handles variable replacements. Mainly, used for the `echo $?` command.
 
 ### Output
-* After you compilied the program, you can check to see if you  have the exact same output as `sh` (`/bin/sh`) as well as the exact same error output.
+* Once compiling our program, you can see that our shell has the exact same output as well as the same error messages as `sh` does.
+#### `sh`
 ```
 $ echo "qwerty" | /bin/sh
 /bin/sh: 1: qwerty: not found
@@ -64,17 +65,20 @@ $ echo "qwerty" | /bin/../bin/sh
 /bin/../bin/sh: 1: qwerty: not found
 $
 ```
-* The only difference is when you print an error, the name of the program must be equivalent to your `argv[0]`.
+* The error message is personalized to your exacutable filename, in this case `hsh`.
 ```
+#### `./hsh` (our shell)
 $ echo "qwerty" | ./hsh
 ./hsh: 1: qwerty: not found
 $ echo "qwerty" | ./././hsh
 ./././hsh: 1: qwerty: not found
 $
 ```
+### Interactive vs Non-Interactive
+Our shell can work in two different modes, interactive and non-interactive.
 
-### Interactive Mode
-Our shell should work like this in interactive mode:
+## Interactive Mode
+The classic shell. Every time a command is entered, the prompt appears again and waits for more commands:
 ```
 $ ./hsh
 ($) /bin/ls
@@ -84,51 +88,57 @@ AUTHORS handle_path.c  int_string.c  main.c
 $
 ```
 
-### Non-Interactive Mode
-Also, our shell should work like this in non-interactive mode:
+## Non-Interactive Mode
+Piping a command into the executable file. Our shell executes the command, and exits the shell. 
 ```
 $ echo "/bin/ls" | ./hsh
 AUTHORS handle_path.c  int_string.c  main.c
 $
-$ cat test_ls_2
-/bin/ls
-/bin/ls
+$ echo "pwd" | ./hsh
+/vagrant/home/
 $
-$ cat test_ls_2 | ./hsh
-AUTHORS handle_path.c  int_string.c  main.c
-AUTHORS handle_path.c  int_string.c  main.c
+$ echo "ls -a" | ./hsh
+AUTHORS handle_path.c  int_string.c  main.c .git . ..
 $
 ```
 ### Built-in Commands
-Here are the list of built-in commands we made for our custom shell. Included in the description are examples of what each built-in is capable of.
+Our shell includes some of the built-in commands.
 
-Each one of our custom built-in functions can be compared to the actual shell output for testing purposes using the `sh` command outside of our custom shell. With `sh` you can see if our built-in replicates the same output as a actual would.
+Each one of our custom built-in functions can be compared to the the `sh` shell output.
 * **exit**
   * Usage - `$ exit` or `$ exit 98`
-  * When entered, it will Exit the user out of our custom shell.
-  * You can doubl check if the built-in command worked by typing in `echo $?` and see if the out is the number you typed after the `exit` built-in. If the default `exit` is used, the number will always be 1. 
+  * When entered correctly (a valid exit value), the user will exit the shell. If no value is entered, the shell will exit the return value of the last command entered.
+  * You can see the exit value by entering `echo $?` after exiting the shell.
 
 * **env**
   * Usage - `$ env`
-  * When entered, it will Print the current environment.
+  * When entered, all of the current environment variables will be printed.
 
 * **setenv**
   * Usage - `$ setenv [VARIABLE] [VALUE]`
-  * When entered, it will initialize a new environment variable, or modify an existing one.
-  * Should print something on stderr upon failure.
+  * When entered, either a new environment variable is created, or an existing one is modified.
+  * If an error occurs (e.g. no parameters included), a message is displayed to the standard error output.
 
 * **unsetenv**
   * Usage - `$ unsetenv [VARIABLE]`
-  * When entered, it will remove an environment variable.
-  * Should print something on stderr upon failure.
+  * When entered, an environment variable is removed from the list.
+  * If an error occurs (e.g. variable not found, no parameters included), a message is displayed to the standard error output.
 
 * **cd**
   * Usage - `$ cd [DIRECTORY]`
-  * When entered, it will change the current directory of the process.
-  * If no argument is given to `cd` the command will be interpreted like `cd $HOME`.
+  * When entered, the current working directory is changed.
+  * `cd -`: changes the working directory the previous one.
+  * `cd`: if no argument is entered, the command is interpreted as `cd $HOME`
+  * If an error occurs (e.g. directory is not valid), a message is displayed to the standard error output.
+
+### Variable Replacements
+Our shell knows to replace variables with `$`.
+  * `echo $PATH`: the varaible `PATH` gets replaced with its value.
+  * `echo $$`: the current process ID is displayed.
+  * `echo $?`: the return/exit value of the last command entered is displayed.
 
 ### Bugs
-Our custom-made shell is not perfect. It has some memory leaks. As well as the `setenv` and `unsetenv` wil not work as expected when compared to their C library versions.
+A few memory leaks when entering commands that do not exist.
 
 ### About
 All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
