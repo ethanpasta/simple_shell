@@ -58,7 +58,8 @@ char **check_create_args(char **buffer, size_t *buffer_size, built_info_t *in)
 		/* if in interactive mode, print a new line */
 		if (isatty(0))
 			_puts("\n", 1);
-		free_stuff(in, *buffer);
+		free(*buffer);
+		free_stuff(in);
 		/* exit if Ctrl + D was pressed */
 		exit(0);
 	}
@@ -106,6 +107,7 @@ void child_proc(built_t built_ins[], pid_t *child_p, built_info_t *in)
 			error_msg(*in);
 		else
 			perror(in->args[0]);
+		free_stuff(in);
 		exit(127);
 	}
 	/* check (and execute) if command on its own is a full command path */
@@ -115,6 +117,7 @@ void child_proc(built_t built_ins[], pid_t *child_p, built_info_t *in)
 			error_msg(*in);
 		else
 			perror(in->args[0]);
+		free_stuff(in);
 		exit(127);
 	}
 }
