@@ -56,7 +56,7 @@ File Name | Description
 [var_replace.c](https://github.com/ethanpasta/simple_shell/blob/master/var_replace.c) | This is the file that contains the function that handles variable replacements. Mainly, used for the `echo $?` command.
 
 ### Output
-* Once compiling our program, you can see that our shell has the exact same output as well as the same error messages as `sh` does.
+Once compiling our program, you can see that our shell has the exact same output as well as the same error messages as `sh` does.
 #### `sh`
 ```
 $ echo "qwerty" | /bin/sh
@@ -66,18 +66,18 @@ $ echo "qwerty" | /bin/../bin/sh
 $
 ```
 * The error message is personalized to your exacutable filename, in this case `hsh`.
-```
 #### `./hsh` (our shell)
+```
 $ echo "qwerty" | ./hsh
 ./hsh: 1: qwerty: not found
 $ echo "qwerty" | ./././hsh
 ./././hsh: 1: qwerty: not found
 $
 ```
-### Interactive vs Non-Interactive
+## Interactive vs Non-Interactive
 Our shell can work in two different modes, interactive and non-interactive.
 
-## Interactive Mode
+### Interactive Mode
 The classic shell. Every time a command is entered, the prompt appears again and waits for more commands:
 ```
 $ ./hsh
@@ -88,7 +88,7 @@ AUTHORS handle_path.c  int_string.c  main.c
 $
 ```
 
-## Non-Interactive Mode
+### Non-Interactive Mode
 Piping a command into the executable file. Our shell executes the command, and exits the shell. 
 ```
 $ echo "/bin/ls" | ./hsh
@@ -133,7 +133,7 @@ Each one of our custom built-in functions can be compared to the the `sh` shell 
 
 ### Variable Replacements
 Our shell knows to replace variables with `$`.
-  * `echo $PATH`: the varaible `PATH` gets replaced with its value.
+  * `echo $PATH`: the variable `PATH` gets replaced with its value.
   * `echo $$`: the current process ID is displayed.
   * `echo $?`: the return/exit value of the last command entered is displayed.
 
