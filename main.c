@@ -2,6 +2,7 @@
 
 /**
  * free_stuff - function frees arrays and lists
+ * @buffer: the buffer we are freeing
  * @build: built in info structure
  *
  * Return: none
