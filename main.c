@@ -7,11 +7,10 @@
  *
  * Return: none
  */
-void free_stuff(built_info_t *build, char *buffer)
+void free_stuff(built_info_t *build)
 {
 	free_list(build->env);
 	free_array(build->env_s);
-	free(buffer);
 }
 
 /**
