@@ -85,7 +85,8 @@ void print_list(list_t *h)
 {
 	while (h)
 	{
-		printf("%s\n", h->str);
+		_puts(h->str, 1);
+		_puts("\n", 1);
 		h = h->next;
 	}
 }
