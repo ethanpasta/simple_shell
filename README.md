@@ -34,6 +34,8 @@ Do take note that the shell ignores the `CTRL + C` signal. When entered, the sig
 
 ### Files
 The following table describes in short the contents of each file in this repository.
+
+
 File Name | Description
 --- | ---
 [builtin_f.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f.c) | This file is where we stord all the code we wrote for our built-in commands. It contains the code for the functions `print_env`, `exit`, `setenv` and `unsetenv`. As well as the `do_built_in` function that goes through our array of functions o search for the correct built-ins.
