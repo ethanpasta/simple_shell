@@ -6,27 +6,26 @@ This project was created as part of the third month curriculum at [Holberton Sch
 Due to it's simplicity, our custom-built shell has some of the functionalities of a normal shell, but not all of them. Down below we will describe each feature our shell contains.
 
 ### Compilation
-Our shell can be compiled either this way:
+To create an executable, compile the C files like this:
 ```
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 ```
-Or this way:
+Or this way (without error checking):
 ```
 gcc *.c -o hsh
 ```
 ### Entering the Shell
-Once compiled, the executable file `./hsh` can be used to enter our custom shell. Your output for the shell should look something like this:
+Once compiled, use the executable file `hsh` to enter. Your output for the shell should look something like this:
 ```
 $ ./hsh
-($)
+($hell) 
 ```
 
-Once the prompt (`$`) shows up and not the previous `$`, then you'll know that the custom-built shell is working.
+If the prompt (`$hell`) shows up and not the normal `$`, you'll know that you are in our custom shell.
 
 ### Example Usage
-* `$ ls -l` - lists all files in your current directory in long format and then prints the prompt on the new line.
-* `$ \bin\ls` - lists all file in your current directory and then prints the prompt on the new line.
-* `$ env` - prints a list of the current environment variables.
+![Shell Example](images/shell-example.png)
+
 * `$ exit` - exits out of the shell followed by a new line.
 
 ### Exiting the Shell
