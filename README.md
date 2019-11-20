@@ -37,7 +37,6 @@ Do take note that our shell ignores the `CTRL + C` signal. As such, when entered
 ### Files
 File Name | Description
 --- | ---
-[AUTHORS](https://github.com/ethanpasta/simple_shell/blob/master/AUTHORS) | This file store the contact info of all individuals who contributed to the branches of our shell code, 
 [builtin_f.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f.c) | This file is where we stord all the code we wrote for our built-in commands. It contains the code for the functions `print_env`, `exit`, `setenv` and `unsetenv`. As well as the `do_built_in` function that goes through our array of functions o search for the correct built-ins.
 [builtin_f2.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f2.c) | File that contains more buit-in functions. Specifically, the `cd` builtin for change directory.
 [handle_path.c](https://github.com/ethanpasta/simple_shell/blob/master/handle_path.c) | Contains 2 functions that handle the PATH environmental variable. The `find_env_value` function returns the PATH in the env, while the `check_file_withP` function will check if the command exist inside the PATH directories.
