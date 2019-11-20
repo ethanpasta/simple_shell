@@ -38,25 +38,25 @@ The following table describes in short the contents of each file in this reposit
 
 File Name | Description
 --- | ---
-[builtin_f.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f.c) | This file is where we stord all the code we wrote for our built-in commands. It contains the code for the functions `print_env`, `exit`, `setenv` and `unsetenv`. As well as the `do_built_in` function that goes through our array of functions o search for the correct built-ins.
-[builtin_f2.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f2.c) | File that contains more buit-in functions. Specifically, the `cd` builtin for change directory.
-[handle_path.c](https://github.com/ethanpasta/simple_shell/blob/master/handle_path.c) | Contains 2 functions that handle the PATH environmental variable. The `find_env_value` function returns the PATH in the env, while the `check_file_withP` function will check if the command exist inside the PATH directories.
-[help_main.c](https://github.com/ethanpasta/simple_shell/blob/master/help_main.c) | All the functions we used in pur `main.c` file is inside this file. 
-[int_string.c](https://github.com/ethanpasta/simple_shell/blob/master/int_string.c) | Where we placed our `_atoi` and `_itoa` functions.
-[list_array.c](https://github.com/ethanpasta/simple_shell/blob/master/list_array.c) | The file that contains our 2 functions to converts an array of strings into a linked list and vice versa converts linked list to an array of strings.
-[list_f.c](https://github.com/ethanpasta/simple_shell/blob/B/list_f.c) | The file that contains the 1st half of all the functions concerning the topic of linked lists.
-[list_f2.c](https://github.com/ethanpasta/simple_shell/blob/B/list_f2.c) | The file that contains the 2st half of all the functions concerning the topic of linked lists.
-[main.c](https://github.com/ethanpasta/simple_shell/blob/master/main.c) | Our entry point for the simple shell. This where the main stroke of our shell will start from.
-[man_1_simple_shell](https://github.com/ethanpasta/simple_shell/blob/master/man_1_simple_shell) | The man page for our simple shell. Type in `man ./man_1_simple_shell` to see the man page on your editor.
-[modify_env.c](https://github.com/ethanpasta/simple_shell/blob/master/modify_env.c) | Contains 2 helper functions that are used for our `setenv` and `unsetenv` built-in functions.
-[shell_head.h](https://github.com/ethanpasta/simple_shell/blob/master/shell_head.h) | Our header file that contains all the libraies we used and all our prototypes we created. As well as the 2 structs we created.
-[string_f.c](https://github.com/ethanpasta/simple_shell/blob/master/string_f.c) | This where all our custom built string functions are stored. i.e `_strlen`, `_puts`
-[string_f2.c](https://github.com/ethanpasta/simple_shell/blob/B/string_f2.c) | Another file that contains more functions that are related to strings.
-[string_split.c](https://github.com/ethanpasta/simple_shell/blob/master/string_split.c) | Where we created our custom built strtok function we name `strtow`.
-[var_replace.c](https://github.com/ethanpasta/simple_shell/blob/master/var_replace.c) | This is the file that contains the function that handles variable replacements. Mainly, used for the `echo $?` command.
+[builtin_f.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f.c) | Contains the commands `exit`, `setenv` and `unsetenv`, as well as other helpful functions.
+[builtin_f2.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f2.c) | Contains the command `cd` builtin for change directory, as well as other helpful functions.
+[handle_path.c](https://github.com/ethanpasta/simple_shell/blob/master/handle_path.c) | Contains functions that handle the PATH environment variable.
+[help_main.c](https://github.com/ethanpasta/simple_shell/blob/master/help_main.c) | Contains various helpful functions for the `main.c` file (main functionality of the program). 
+[int_string.c](https://github.com/ethanpasta/simple_shell/blob/master/int_string.c) | Contains `itoa` and `atoi` functions.
+[list_array.c](https://github.com/ethanpasta/simple_shell/blob/master/list_array.c) | Contains functions to converts an array of strings into a linked list and vice versa.
+[list_f.c](https://github.com/ethanpasta/simple_shell/blob/B/list_f.c) | Contains various linked lists functions.
+[list_f2.c](https://github.com/ethanpasta/simple_shell/blob/B/list_f2.c) | Contains more function for linked lists operations.
+[main.c](https://github.com/ethanpasta/simple_shell/blob/master/main.c) | Entry point for the shell, and main loop for the program.
+[man_1_simple_shell](https://github.com/ethanpasta/simple_shell/blob/master/man_1_simple_shell) | The man page for our simple shell. Type in `man ./man_1_simple_shell` to see the man page.
+[modify_env.c](https://github.com/ethanpasta/simple_shell/blob/master/modify_env.c) | Contains functions that are used for thr `setenv` and `unsetenv` built-in commands.
+[shell_head.h](https://github.com/ethanpasta/simple_shell/blob/master/shell_head.h) | Header file that contains all libraries, function prototypes, and structs definitions.
+[string_f.c](https://github.com/ethanpasta/simple_shell/blob/master/string_f.c) | Contains custom built string functions- `_strlen`, `_puts` (personalized versions of built-in functions).
+[string_f2.c](https://github.com/ethanpasta/simple_shell/blob/B/string_f2.c) | Contains more custom built string functions.
+[string_split.c](https://github.com/ethanpasta/simple_shell/blob/master/string_split.c) | Contains custom built strtok function - `strtow`.
+[var_replace.c](https://github.com/ethanpasta/simple_shell/blob/master/var_replace.c) | Handles variable replacements. Mainly, used for the `echo $?` command.
 
 ### Output
-Once compiling our program, you can see that our shell has the exact same output as well as the same error messages as `sh` does.
+Once compiling our program, you can see that our shell has the same output and same error messages as the normal shell would.
 #### `sh`
 ```
 $ echo "qwerty" | /bin/sh
@@ -68,23 +68,23 @@ $
 * The error message is personalized to your exacutable filename, in this case `hsh`.
 #### `./hsh` (our shell)
 ```
-$ echo "qwerty" | ./hsh
+($hell) echo "qwerty" | ./hsh
 ./hsh: 1: qwerty: not found
-$ echo "qwerty" | ./././hsh
+($hell) echo "qwerty" | ./././hsh
 ./././hsh: 1: qwerty: not found
-$
+($hell)
 ```
 ## Interactive vs Non-Interactive
-Our shell can work in two different modes, interactive and non-interactive.
+Our shell works in two different modes, interactive and non-interactive.
 
 ### Interactive Mode
-The classic shell. Every time a command is entered, the prompt appears again and waits for more commands:
+The classic shell. Every time a command is entered, the prompt appears again and waits for the next user input:
 ```
 $ ./hsh
-($) /bin/ls
+($hell) /bin/ls
 AUTHORS handle_path.c  int_string.c  main.c
-($)
-($) exit
+($hell)
+($hell) exit
 $
 ```
 
@@ -145,8 +145,3 @@ All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
 ### Authors
 - **Ethan Mayer** - [ethanpasta](https://github.com/ethanpasta/simple_shell)
 - **Jun Zhu** - [VieetBubbles](https://github.com/VieetBubbles)
-### Acknowledgments
-- **Tu Vu** - [tuvo1106](https://github.com/tuvo1106)
-- **Jason Cortella** - [jasoncortella](https://github.com/jasoncortella)
-- **Laura Roudge** - [lroudge](https://github.com/lroudge)
-- **Arthur Damm** - [arthurdamm](https://github.com/arthurdamm)
