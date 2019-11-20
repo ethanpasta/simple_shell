@@ -8,7 +8,7 @@ Due to it's simplicity, our custom-built shell has some of the functionalities o
 ### Compilation
 To create an executable, compile the C files like this:
 ```
-gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh (or any other name you desire)
 ```
 Or this way (without error checking):
 ```
@@ -30,9 +30,10 @@ If the prompt (`$hell`) shows up and not the normal `$`, you'll know that you ar
 ### Exiting the Shell
 To exit out of the shell, you can use either `CTRL + D`, or `CTRL + Z` or by typing in the built-in `exit` to the command line.
 
-Do take note that the shell ignores the `CTRL + C` signal. When entered, the signal as `^C` will be printed without exiting. To exit, use one of the inputs explained above. 
+Do take note that the shell ignores the `CTRL + C` signal. When entered, the signal `^C` will be printed without exiting. To exit, use one of the inputs explained above. 
 
 ### Files
+The following table describes in short the contents of each file in this repository.
 File Name | Description
 --- | ---
 [builtin_f.c](https://github.com/ethanpasta/simple_shell/blob/master/builtin_f.c) | This file is where we stord all the code we wrote for our built-in commands. It contains the code for the functions `print_env`, `exit`, `setenv` and `unsetenv`. As well as the `do_built_in` function that goes through our array of functions o search for the correct built-ins.
