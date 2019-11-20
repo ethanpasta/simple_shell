@@ -147,4 +147,4 @@ Our shell knows to replace variables with `$`.
 - **Jun Zhu** - [VieetBubbles](https://github.com/VieetBubbles)
 
 ### License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
