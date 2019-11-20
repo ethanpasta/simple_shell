@@ -102,34 +102,34 @@ AUTHORS handle_path.c  int_string.c  main.c .git . ..
 $
 ```
 ### Built-in Commands
-Our shell includes some of the built-in commands.
+The shell includes the following built-in commands.
 
-Each one of our custom built-in functions can be compared to the the `sh` shell output.
+Each one of the custom built-in commands can be compared to the the normal `sh` shell output.
 * **exit**
-  * Usage - `$ exit` or `$ exit 98`
-  * When entered correctly (a valid exit value), the user will exit the shell. If no value is entered, the shell will exit the return value of the last command entered.
+  * Usage - `$ exit` or `$ exit [VALUE]`
+  * When entered correctly (valid exit value or nothing), the user exits the shell. The exit value will be the parameter passed, or the return value of the latest command if no value was passed.
   * You can see the exit value by entering `echo $?` after exiting the shell.
 
 * **env**
   * Usage - `$ env`
-  * When entered, all of the current environment variables will be printed.
+  * When entered, all of the current environment variables and their values are displayed.
 
 * **setenv**
   * Usage - `$ setenv [VARIABLE] [VALUE]`
   * When entered, either a new environment variable is created, or an existing one is modified.
-  * If an error occurs (e.g. no parameters included), a message is displayed to the standard error output.
+  * If an error occurs (e.g. no parameters included), a message is displayed in the standard error output.
 
 * **unsetenv**
   * Usage - `$ unsetenv [VARIABLE]`
-  * When entered, an environment variable is removed from the list.
-  * If an error occurs (e.g. variable not found, no parameters included), a message is displayed to the standard error output.
+  * When entered, an environment variable is removed.
+  * If an error occurs (e.g. variable not found, no parameters included), a message is displayed in the standard error output.
 
 * **cd**
   * Usage - `$ cd [DIRECTORY]`
   * When entered, the current working directory is changed.
-  * `cd -`: changes the working directory the previous one.
+  * `cd -`: changes the working directory to the previous one.
   * `cd`: if no argument is entered, the command is interpreted as `cd $HOME`
-  * If an error occurs (e.g. directory is not valid), a message is displayed to the standard error output.
+  * If an error occurs (e.g. directory is not valid), a message is displayed in the standard error output.
 
 ### Variable Replacements
 Our shell knows to replace variables with `$`.
@@ -137,11 +137,9 @@ Our shell knows to replace variables with `$`.
   * `echo $$`: the current process ID is displayed.
   * `echo $?`: the return/exit value of the last command entered is displayed.
 
-### Bugs
-A few memory leaks when entering commands that do not exist.
-
-### About
-All files were created and compiled on `Ubuntu 14.04.4 LTS` using `GCC 4.8.4`
 ### Authors
 - **Ethan Mayer** - [ethanpasta](https://github.com/ethanpasta/simple_shell)
 - **Jun Zhu** - [VieetBubbles](https://github.com/VieetBubbles)
+
+### License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
