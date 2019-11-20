@@ -137,13 +137,13 @@ Our shell knows to replace variables with `$`.
   * `echo $$`: the current process ID is displayed.
   * `echo $?`: the return/exit value of the last command entered is displayed.
 
-[1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
-[6.1]: http://i.imgur.com/0o48UoR.png (github icon with padding)
+[1.2]: http://i.imgur.com/wWzX9uB.png (twitter)
+[6.2]: http://i.imgur.com/9I6NRUm.png (github)
 [1]: http://www.twitter.com/eitanmayer57
 [6]: http://www.github.com/ethanpasta
 
 ### Authors
-- **Ethan Mayer** - [![alt text][1.1]][1] | [![alt text][6.1]][6]
+- **Ethan Mayer** - [![alt text][1.2]][1] | [![alt text][6.2]][6]
 - **Jun Zhu** - [VieetBubbles](https://github.com/VieetBubbles)
 
 ### License
